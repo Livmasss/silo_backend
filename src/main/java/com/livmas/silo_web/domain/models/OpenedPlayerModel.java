@@ -1,6 +1,6 @@
 package com.livmas.silo_web.domain.models;
 
-public class PlayerModel {
+public class OpenedPlayerModel {
     public String name;
     public String gender;
     public String health;
@@ -12,7 +12,8 @@ public class PlayerModel {
     public String information;
     public String action;
 
-    public PlayerModel(
+    public OpenedPlayerModel(
+        String name,
         String gender,
         String health,
         String personality,
@@ -23,6 +24,7 @@ public class PlayerModel {
         String information,
         String action
     ) {
+        this.name = name;
         this.gender = gender;
         this.health = health;
         this.personality = personality;

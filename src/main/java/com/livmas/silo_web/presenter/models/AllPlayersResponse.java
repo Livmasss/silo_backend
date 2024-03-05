@@ -1,15 +1,15 @@
-package com.livmas.silo_web.models;
+package com.livmas.silo_web.presenter.models;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AllPlayersResponse {
-    public AllPlayersResponse(ArrayList<PlayerResponse> content) {
+    public AllPlayersResponse(List<OpenedPlayerResponse> content) {
         players = content;
     }
 
-    private final List<PlayerResponse> players;
-    public List<PlayerResponse> getPlayers() {
+    private final List<OpenedPlayerResponse> players;
+    public List<OpenedPlayerResponse> getPlayers() {
         return players;
     }
 }

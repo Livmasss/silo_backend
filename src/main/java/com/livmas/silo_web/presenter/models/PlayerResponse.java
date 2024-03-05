@@ -1,4 +1,6 @@
-package com.livmas.silo_web.models;
+package com.livmas.silo_web.presenter.models;
+
+import com.livmas.silo_web.domain.models.PlayerModel;
 
 public class PlayerResponse {
     public String gender;
@@ -11,24 +13,15 @@ public class PlayerResponse {
     public String information;
     public String action;
 
-    public PlayerResponse(String gender,
-        String health,
-        String personality,
-        String profession,
-        String hobby,
-        String phobia,
-        String inventory,
-        String information,
-        String action
-    ) {
-        this.gender = gender;
-        this.health = health;
-        this.personality = personality;
-        this.profession = profession;
-        this.hobby = hobby;
-        this.phobia = phobia;
-        this.inventory = inventory;
-        this.information = information;
-        this.action = action;
+    public PlayerResponse(PlayerModel model) {
+        this.gender = model.gender;
+        this.health = model.health;
+        this.personality = model.personality;
+        this.profession = model.profession;
+        this.hobby = model.hobby;
+        this.phobia = model.phobia;
+        this.inventory = model.inventory;
+        this.information = model.information;
+        this.action = model.action;
     }
 }

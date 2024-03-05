@@ -1,18 +1,16 @@
-package com.livmas.silo_web.domain;
+package com.livmas.silo_web.domain.usecases;
 
-import com.livmas.silo_web.domain.models.PlayerModel;
-import org.springframework.stereotype.Component;
+import com.livmas.silo_web.domain.models.OpenedPlayerModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 public class GetOpenedPlayersDataUseCase {
-    public List<PlayerModel> execute() {
-        List<PlayerModel> list = new ArrayList<>();
+    public List<OpenedPlayerModel> execute(int room_id) {
+        List<OpenedPlayerModel> list = new ArrayList<>();
 
         list.add(
-            new PlayerModel(
+            new OpenedPlayerModel(
                 "Зубослеп",
                 "Мужчина",
                 "",
@@ -22,11 +20,11 @@ public class GetOpenedPlayersDataUseCase {
                 "",
                 "Ящик пива",
                 "",
-                ""
+                "Обменяться картами рофессий с любым игроком"
         ));
 
         list.add(
-            new PlayerModel(
+            new OpenedPlayerModel(
                 "Евгения",
                 "Мужчина",
                 "",
@@ -40,7 +38,7 @@ public class GetOpenedPlayersDataUseCase {
         ));
 
         list.add(
-                new PlayerModel(
+                new OpenedPlayerModel(
                     "Кринжеслав",
                     "Мужчина",
                     "Проблем нет",

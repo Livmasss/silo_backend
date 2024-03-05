@@ -1,40 +1,41 @@
-package com.livmas.silo_web.controllers;
+package com.livmas.silo_web.presenter.controllers;
 
 
-import com.livmas.silo_web.models.PlayerRequest;
-import com.livmas.silo_web.models.PlayerResponse;
+import com.livmas.silo_web.domain.usecases.GetAllVotesUseCase;
+import com.livmas.silo_web.domain.usecases.GetOpenedPlayersDataUseCase;
+import com.livmas.silo_web.domain.usecases.GetPlayerDataUseCase;
+import com.livmas.silo_web.presenter.models.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PlayerController {
-    @GetMapping("/player")
-    public PlayerResponse getPlayerData(@RequestBody PlayerRequest request) {
+    GetOpenedPlayersDataUseCase getOpenedPlayersDataUseCase = new GetOpenedPlayersDataUseCase();
+    GetPlayerDataUseCase getPlayerDataUseCase = new GetPlayerDataUseCase();
+    GetAllVotesUseCase getAllVotesUseCase = new GetAllVotesUseCase();
+
+    @GetMapping("/api/player_data")
+    public PlayerResponse getPlayerData(/**@RequestBody PlayerRequest request**/) {
         return new PlayerResponse(
-            "Мужчина",
-            "Спид",
-            "Уверенный",
-            "Гид по туалетам",
-            "Геймер",
-            "Клоунофобия",
-            "Виагра",
-            "Работал в Росгвардии",
-            "В этом голосовании ваш голос считается за 2"
+                getPlayerDataUseCase.execute(0, 0)
         );
     }
 
 
-    @GetMapping("/players")
-    public PlayerResponse getAllPlayersData(@RequestBody PlayerRequest request) {
-        return new PlayerResponse(
-                "Мужчина",
-                "Спид",
-                "Уверенный",
-                "Гид по туалетам",
-                "Геймер",
-                "Клоунофобия",
-                "Виагра",
-                "Работал в Росгвардии",
-                "В этом голосовании ваш голос считается за 2"
+    @GetMapping("/api/players_open_data")
+    public AllPlayersResponse getAllPlayersData(/**@RequestBody PlayerRequest request**/) {
+        return new AllPlayersResponse(
+                getOpenedPlayersDataUseCase.execute(0).stream().map(
+                        OpenedPlayerResponse::new
+                ).toList()
+        );
+    }
+
+    @GetMapping("/api/players_votes")
+    public AllVotesResponse getActionsData() {
+        return new AllVotesResponse(
+                getAllVotesUseCase.execute(0, 0).stream().map(
+                        PlayerVotesResponse::new
+                ).toList()
         );
     }
 }

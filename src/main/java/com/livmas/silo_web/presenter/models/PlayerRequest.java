@@ -1,4 +1,4 @@
-package com.livmas.silo_web.models;
+package com.livmas.silo_web.presenter.models;
 
 public class PlayerRequest {
     public int room_id;
