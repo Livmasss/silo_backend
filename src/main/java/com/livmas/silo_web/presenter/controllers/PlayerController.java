@@ -5,13 +5,25 @@ import com.livmas.silo_web.domain.usecases.GetAllVotesUseCase;
 import com.livmas.silo_web.domain.usecases.GetOpenedPlayersDataUseCase;
 import com.livmas.silo_web.domain.usecases.GetPlayerDataUseCase;
 import com.livmas.silo_web.presenter.models.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PlayerController {
-    GetOpenedPlayersDataUseCase getOpenedPlayersDataUseCase = new GetOpenedPlayersDataUseCase();
-    GetPlayerDataUseCase getPlayerDataUseCase = new GetPlayerDataUseCase();
-    GetAllVotesUseCase getAllVotesUseCase = new GetAllVotesUseCase();
+    @Autowired
+    public PlayerController(
+            GetOpenedPlayersDataUseCase getOpenedPlayersDataUseCase,
+            GetPlayerDataUseCase getPlayerDataUseCase,
+            GetAllVotesUseCase getAllVotesUseCase
+    ) {
+        this.getOpenedPlayersDataUseCase = getOpenedPlayersDataUseCase;
+        this.getPlayerDataUseCase = getPlayerDataUseCase;
+        this.getAllVotesUseCase = getAllVotesUseCase;
+    }
+
+    private final GetOpenedPlayersDataUseCase getOpenedPlayersDataUseCase;
+    private final GetPlayerDataUseCase getPlayerDataUseCase;
+    private final GetAllVotesUseCase getAllVotesUseCase;
 
     @GetMapping("/api/player_data")
     public PlayerResponse getPlayerData(/**@RequestBody PlayerRequest request**/) {
@@ -19,7 +31,6 @@ public class PlayerController {
                 getPlayerDataUseCase.execute(0, 0)
         );
     }
-
 
     @GetMapping("/api/players_open_data")
     public AllPlayersResponse getAllPlayersData(/**@RequestBody PlayerRequest request**/) {

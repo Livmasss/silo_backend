@@ -1,10 +1,12 @@
 package com.livmas.silo_web.domain.usecases;
 
 import com.livmas.silo_web.domain.models.PlayerVotesModel;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class GetAllVotesUseCase {
     public List<PlayerVotesModel> execute(int player_id, int room_id) {
         List<PlayerVotesModel> list = new ArrayList<>();

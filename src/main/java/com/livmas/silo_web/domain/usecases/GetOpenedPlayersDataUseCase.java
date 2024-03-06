@@ -1,10 +1,12 @@
 package com.livmas.silo_web.domain.usecases;
 
 import com.livmas.silo_web.domain.models.OpenedPlayerModel;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class GetOpenedPlayersDataUseCase {
     public List<OpenedPlayerModel> execute(int room_id) {
         List<OpenedPlayerModel> list = new ArrayList<>();
