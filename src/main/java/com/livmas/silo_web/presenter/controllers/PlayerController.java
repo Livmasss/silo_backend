@@ -32,10 +32,10 @@ public class PlayerController {
         );
     }
 
-    @GetMapping("/api/players_open_data")
-    public AllPlayersResponse getAllPlayersData(/**@RequestBody PlayerRequest request**/) {
+    @GetMapping("/api/players_open_data/{room_id}")
+    public AllPlayersResponse getAllPlayersData(@PathVariable("room_id") int roomId, @RequestParam("player_id") int playerId) {
         return new AllPlayersResponse(
-                getOpenedPlayersDataUseCase.execute(0).stream().map(
+                getOpenedPlayersDataUseCase.execute(roomId).stream().map(
                         OpenedPlayerResponse::new
                 ).toList()
         );
