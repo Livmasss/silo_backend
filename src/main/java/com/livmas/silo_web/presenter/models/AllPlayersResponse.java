@@ -1,6 +1,5 @@
 package com.livmas.silo_web.presenter.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AllPlayersResponse {

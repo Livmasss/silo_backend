@@ -5,8 +5,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class GetPlayerDataUseCase {
-    public PlayerModel execute(int player_id, int room_id) {
+    public PlayerModel execute(int room_id, int player_id) {
         return new PlayerModel(
+                10,
                 "Мужчина",
                 "Спид",
                 "Уверенный",

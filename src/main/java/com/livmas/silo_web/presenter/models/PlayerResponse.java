@@ -3,6 +3,7 @@ package com.livmas.silo_web.presenter.models;
 import com.livmas.silo_web.domain.models.PlayerModel;
 
 public class PlayerResponse {
+    public int id;
     public String gender;
     public String health;
     public String personality;
@@ -14,6 +15,7 @@ public class PlayerResponse {
     public String action;
 
     public PlayerResponse(PlayerModel model) {
+        this.id = model.id;
         this.gender = model.gender;
         this.health = model.health;
         this.personality = model.personality;

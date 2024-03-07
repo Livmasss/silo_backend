@@ -1,6 +1,7 @@
 package com.livmas.silo_web.domain.models;
 
 public class PlayerModel {
+    public int id;
     public String gender;
     public String health;
     public String personality;
@@ -12,16 +13,18 @@ public class PlayerModel {
     public String action;
 
     public PlayerModel(
-        String gender,
-        String health,
-        String personality,
-        String profession,
-        String hobby,
-        String phobia,
-        String inventory,
-        String information,
-        String action
+            int id,
+            String gender,
+            String health,
+            String personality,
+            String profession,
+            String hobby,
+            String phobia,
+            String inventory,
+            String information,
+            String action
     ) {
+        this.id = id;
         this.gender = gender;
         this.health = health;
         this.personality = personality;

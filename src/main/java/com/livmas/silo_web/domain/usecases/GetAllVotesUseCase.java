@@ -8,7 +8,7 @@ import java.util.List;
 
 @Component
 public class GetAllVotesUseCase {
-    public List<PlayerVotesModel> execute(int player_id, int room_id) {
+    public List<PlayerVotesModel> execute(int room_id) {
         List<PlayerVotesModel> list = new ArrayList<>();
 
         List<Integer> votes0 = new ArrayList<>(1);

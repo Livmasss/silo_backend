@@ -25,15 +25,15 @@ public class PlayerController {
     private final GetPlayerDataUseCase getPlayerDataUseCase;
     private final GetAllVotesUseCase getAllVotesUseCase;
 
-    @GetMapping("/api/player_data")
-    public PlayerResponse getPlayerData(/**@RequestBody PlayerRequest request**/) {
+    @GetMapping("/api/player_data/{room_id}")
+    public PlayerResponse getPlayerData(@PathVariable("room_id") int roomId, @RequestParam("player_id") int playerId) {
         return new PlayerResponse(
-                getPlayerDataUseCase.execute(0, 0)
+                getPlayerDataUseCase.execute(roomId, playerId)
         );
     }
 
     @GetMapping("/api/players_open_data/{room_id}")
-    public AllPlayersResponse getAllPlayersData(@PathVariable("room_id") int roomId, @RequestParam("player_id") int playerId) {
+    public AllPlayersResponse getAllPlayersData(@PathVariable("room_id") int roomId) {
         return new AllPlayersResponse(
                 getOpenedPlayersDataUseCase.execute(roomId).stream().map(
                         OpenedPlayerResponse::new
@@ -41,12 +41,26 @@ public class PlayerController {
         );
     }
 
-    @GetMapping("/api/players_votes")
-    public AllVotesResponse getActionsData() {
+    @GetMapping("/api/players_votes/{room_id}")
+    public AllVotesResponse getActionsData(@PathVariable("room_id") int roomId) {
         return new AllVotesResponse(
-                getAllVotesUseCase.execute(0, 0).stream().map(
+                getAllVotesUseCase.execute(roomId).stream().map(
                         PlayerVotesResponse::new
                 ).toList()
         );
+    }
+
+    @PostMapping("/api/rooms")
+    public CreateRoomResponse createRoom() {
+        return new CreateRoomResponse(0);
+    }
+
+    @PostMapping("/api/rooms/{room_id}")
+    public void startGame(@PathVariable("room_id") int roomId) {
+    }
+
+    @PutMapping("/api/rooms/{room_id}")
+    public void addToRoom(@PathVariable("room_id") int roomId) {
+
     }
 }
