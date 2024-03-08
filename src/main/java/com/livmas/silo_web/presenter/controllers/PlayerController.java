@@ -1,9 +1,9 @@
 package com.livmas.silo_web.presenter.controllers;
 
 
-import com.livmas.silo_web.domain.usecases.GetAllVotesUseCase;
-import com.livmas.silo_web.domain.usecases.GetOpenedPlayersDataUseCase;
-import com.livmas.silo_web.domain.usecases.GetPlayerDataUseCase;
+import com.livmas.silo_web.domain.session.usecases.GetAllVotesUseCase;
+import com.livmas.silo_web.domain.session.usecases.GetOpenedPlayersDataUseCase;
+import com.livmas.silo_web.domain.session.usecases.GetPlayerDataUseCase;
 import com.livmas.silo_web.presenter.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

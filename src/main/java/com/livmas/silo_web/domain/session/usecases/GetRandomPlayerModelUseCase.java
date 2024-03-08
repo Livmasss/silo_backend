@@ -1,11 +1,11 @@
-package com.livmas.silo_web.domain.usecases;
+package com.livmas.silo_web.domain.session.usecases;
 
 import com.livmas.silo_web.domain.models.PlayerModel;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GetPlayerDataUseCase {
-    public PlayerModel execute(int room_id, int player_id) {
+public class GetRandomPlayerModelUseCase {
+    public PlayerModel execute() {
         return new PlayerModel(
                 10,
                 "Мужчина",

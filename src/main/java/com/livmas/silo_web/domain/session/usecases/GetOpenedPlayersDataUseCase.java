@@ -1,4 +1,4 @@
-package com.livmas.silo_web.domain.usecases;
+package com.livmas.silo_web.domain.session.usecases;
 
 import com.livmas.silo_web.domain.models.OpenedPlayerModel;
 import org.springframework.stereotype.Component;
