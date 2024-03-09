@@ -50,17 +50,4 @@ public class PlayerController {
         );
     }
 
-    @PostMapping("/api/rooms")
-    public CreateRoomResponse createRoom() {
-        return new CreateRoomResponse(0);
-    }
-
-    @PostMapping("/api/rooms/{room_id}")
-    public void startGame(@PathVariable("room_id") int roomId) {
-    }
-
-    @PutMapping("/api/rooms/{room_id}")
-    public void addToRoom(@PathVariable("room_id") int roomId) {
-
-    }
 }

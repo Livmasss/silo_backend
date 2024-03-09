@@ -2,11 +2,13 @@ package com.livmas.silo_web.presenter.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.UUID;
+
 public class CreateRoomResponse {
     @JsonProperty("room_id")
-    int roomId;
+    UUID roomId;
 
-    public CreateRoomResponse(int roomId) {
+    public CreateRoomResponse(UUID roomId) {
         this.roomId = roomId;
     }
 }

@@ -1,17 +1,14 @@
 package com.livmas.silo_web.domain.rooms;
 
 import com.livmas.silo_web.domain.models.RoomVisitor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 @Component
 public class RoomsManager {
-//        this.roomId = UUID.randomUUID();
 
     public RoomsManager() {
         this.rooms = new HashMap<>();
@@ -19,8 +16,11 @@ public class RoomsManager {
 
     private final Map<UUID, Room> rooms;
 
-    public void createNewRoom() {
-        rooms.put(UUID.randomUUID(), new Room());
+    public UUID createNewRoom() {
+        UUID id = UUID.randomUUID();
+        rooms.put(id, new Room());
+        System.out.println("Rooms count: " + rooms.size());
+        return id;
     }
 
     public void connectToRoom(UUID roomId, String playerName) {
