@@ -1,5 +1,6 @@
 package com.livmas.silo_web.domain.rooms;
 
+import com.livmas.silo_web.domain.exceptions.RoomNotFoundException;
 import com.livmas.silo_web.domain.models.RoomVisitor;
 import org.springframework.stereotype.Component;
 
@@ -22,9 +23,14 @@ public class RoomsManager {
         return id;
     }
 
-    public void connectToRoom(UUID roomId, String playerName) {
-        rooms.get(roomId).addPlayer(
-                new RoomVisitor(UUID.randomUUID(), playerName)
-        );
+    public void connectToRoom(UUID roomId, String playerName) throws RoomNotFoundException {
+        try {
+            rooms.get(roomId).addPlayer(
+                    new RoomVisitor(UUID.randomUUID(), playerName)
+            );
+        }
+        catch (NullPointerException e) {
+            throw new RoomNotFoundException();
+        }
     }
 }
