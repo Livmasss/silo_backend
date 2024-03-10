@@ -19,7 +19,6 @@ public class RoomsManager {
     public UUID createNewRoom() {
         UUID id = UUID.randomUUID();
         rooms.put(id, new Room());
-        System.out.println("Rooms count: " + rooms.size());
         return id;
     }
 
