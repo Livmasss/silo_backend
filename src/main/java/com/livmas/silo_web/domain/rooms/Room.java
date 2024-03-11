@@ -13,4 +13,8 @@ public class Room {
     public void addPlayer(RoomVisitor roomVisitor) {
         players.add(roomVisitor);
     }
+
+    public List<RoomVisitor> getVisitors() {
+        return players.stream().toList();
+    }
 }

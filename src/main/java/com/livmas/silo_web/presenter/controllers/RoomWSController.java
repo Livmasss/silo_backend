@@ -30,14 +30,21 @@ public class RoomWSController {
 
 
     @MessageMapping("/connect_to_room/{room_id}")
-//    @SendTo("/room/{room_id}")
-    public void connectToRoom(ConnectMessage message, @DestinationVariable("room_id") UUID roomId) {
+    @SendTo("/rooms/{room_id}")
+    public RoomVisitorMessage connectToRoom(ConnectMessage connectMessage, @DestinationVariable("room_id") UUID roomId) {
+        RoomVisitorMessage message = new RoomVisitorMessage();
+
         try {
-            roomsManager.connectToRoom(roomId, message.name);
+            roomsManager.connectToRoom(roomId, connectMessage.name);
             logger.info("Connection to room: " + roomId);
+            message.addAll(roomsManager.readRoomVisitors(roomId).stream().map( visitor ->
+                    visitor.name
+            ).toList());
         } catch (Exception e) {
             logger.info("Room not found");
         }
+
+        return message;
     }
 
     @SendTo("/pong")

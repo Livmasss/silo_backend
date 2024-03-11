@@ -5,6 +5,7 @@ import com.livmas.silo_web.domain.models.RoomVisitor;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -32,5 +33,9 @@ public class RoomsManager {
         catch (NullPointerException e) {
             throw new RoomNotFoundException();
         }
+    }
+
+    public List<RoomVisitor> readRoomVisitors(UUID roomId) {
+        return rooms.get(roomId).getVisitors();
     }
 }
