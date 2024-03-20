@@ -1,9 +1,9 @@
-package com.livmas.silo_web.presenter.models;
+package com.livmas.silo_web.presenter.models.rest.responses;
 
-import com.livmas.silo_web.domain.models.OpenedPlayerModel;
+import com.livmas.silo_web.domain.models.PlayerModel;
 
-public class OpenedPlayerResponse {
-    public String name;
+public class PlayerResponse {
+    public int id;
     public String gender;
     public String health;
     public String personality;
@@ -14,8 +14,8 @@ public class OpenedPlayerResponse {
     public String information;
     public String action;
 
-    public OpenedPlayerResponse(OpenedPlayerModel model) {
-        this.name = model.name;
+    public PlayerResponse(PlayerModel model) {
+        this.id = model.id;
         this.gender = model.gender;
         this.health = model.health;
         this.personality = model.personality;

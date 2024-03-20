@@ -18,9 +18,10 @@ public class RoomsManager {
 
     private final Map<UUID, Room> rooms;
 
-    public UUID createNewRoom() {
+    public UUID createNewRoom(String roomCreator) {
         UUID id = UUID.randomUUID();
         rooms.put(id, new Room());
+        rooms.get(id).addPlayer(new RoomVisitor(UUID.randomUUID(), roomCreator));
         return id;
     }
 

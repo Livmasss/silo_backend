@@ -1,14 +1,12 @@
 package com.livmas.silo_web.presenter.controllers;
 
 import com.livmas.silo_web.domain.rooms.RoomsManager;
-import com.livmas.silo_web.presenter.models.CreateRoomResponse;
+import com.livmas.silo_web.presenter.models.rest.requests.CreateRoomRequest;
+import com.livmas.silo_web.presenter.models.rest.responses.CreateRoomResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -22,9 +20,9 @@ public class RoomRestController {
     private final RoomsManager roomsManager;
 
     @PostMapping("/api/rooms")
-    public CreateRoomResponse createRoom() {
-        UUID id = roomsManager.createNewRoom();
-        logger.info("Room created with id: " + id);
+    public CreateRoomResponse createRoom(@RequestBody CreateRoomRequest request) {
+        UUID id = roomsManager.createNewRoom(request.name());
+        logger.info("Room created with id: " + id + "Creator name: " + request.name());
         return new CreateRoomResponse(id);
     }
 
