@@ -8,6 +8,7 @@ public class GetRandomPlayerModelUseCase {
     public PlayerModel execute() {
         return new PlayerModel(
                 10,
+                null,
                 "Мужчина",
                 "Спид",
                 "Уверенный",

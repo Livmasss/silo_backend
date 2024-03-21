@@ -39,4 +39,8 @@ public class RoomsManager {
     public List<RoomVisitor> readRoomVisitors(UUID roomId) {
         return rooms.get(roomId).getVisitors();
     }
+
+    public Room getRoom(UUID roomId) {
+        return rooms.get(roomId);
+    }
 }

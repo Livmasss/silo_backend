@@ -1,7 +1,11 @@
 package com.livmas.silo_web.presenter.controllers;
 
+import com.livmas.silo_web.domain.models.PlayerModel;
 import com.livmas.silo_web.domain.models.RoomVisitor;
+import com.livmas.silo_web.domain.rooms.Room;
 import com.livmas.silo_web.domain.rooms.RoomsManager;
+import com.livmas.silo_web.domain.session.GameSession;
+import com.livmas.silo_web.domain.session.usecases.GetRandomPlayerModelUseCase;
 import com.livmas.silo_web.presenter.models.sock.ConnectMessage;
 import com.livmas.silo_web.presenter.models.sock.RoomVisitorMessage;
 import org.slf4j.Logger;
@@ -20,15 +24,15 @@ import java.util.UUID;
 public class RoomWSController {
     @Autowired
     public RoomWSController(
-            RoomsManager manager
+            RoomsManager manager,
+            GetRandomPlayerModelUseCase getRandomPlayerModelUseCase
     ) {
         this.roomsManager = manager;
+        this.getRandomPlayerModelUseCase = getRandomPlayerModelUseCase;
     }
     Logger logger = LoggerFactory.getLogger(SpringApplication.class);
     private final RoomsManager roomsManager;
-
-//    private final String basePath = "api/ws";
-
+    private final GetRandomPlayerModelUseCase getRandomPlayerModelUseCase;
 
     @MessageMapping("/connect_to_room/{room_id}")
     @SendTo("/rooms/{room_id}")
@@ -51,8 +55,23 @@ public class RoomWSController {
         return message;
     }
 
-    @SendTo("/pong")
+    @MessageMapping("/start_game/{room_id}")
+    @SendTo("/game_started/{room_id}")
+    public String startGame(@DestinationVariable("room_id") UUID roomId) {
+        new GameSession(roomsManager.readRoomVisitors(roomId).stream().map(visitor -> {
+            PlayerModel player = getRandomPlayerModelUseCase.execute();
+            player.name = visitor.name;
+            return player;
+        }).toList());
+
+        logger.info("Game started in room: " + roomId.toString());
+        return "";
+    }
+
+
+
     @MessageMapping("/ping")
+    @SendTo("/pong")
     public String ping() {
         logger.info("ping occurred");
         return "pong";

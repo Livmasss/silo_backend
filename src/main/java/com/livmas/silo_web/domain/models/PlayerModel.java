@@ -2,6 +2,7 @@ package com.livmas.silo_web.domain.models;
 
 public class PlayerModel {
     public int id;
+    public String name;
     public String gender;
     public String health;
     public String personality;
@@ -14,6 +15,7 @@ public class PlayerModel {
 
     public PlayerModel(
             int id,
+            String name,
             String gender,
             String health,
             String personality,
@@ -25,6 +27,7 @@ public class PlayerModel {
             String action
     ) {
         this.id = id;
+        this.name = name;
         this.gender = gender;
         this.health = health;
         this.personality = personality;
