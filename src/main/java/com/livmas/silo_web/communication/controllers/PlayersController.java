@@ -1,17 +1,17 @@
-package com.livmas.silo_web.presenter.controllers;
+package com.livmas.silo_web.communication.controllers;
 
 
 import com.livmas.silo_web.domain.session.usecases.GetAllVotesUseCase;
 import com.livmas.silo_web.domain.session.usecases.GetOpenedPlayersDataUseCase;
 import com.livmas.silo_web.domain.session.usecases.GetPlayerDataUseCase;
-import com.livmas.silo_web.presenter.models.rest.responses.*;
+import com.livmas.silo_web.communication.models.rest.responses.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class PlayerController {
+public class PlayersController {
     @Autowired
-    public PlayerController(
+    public PlayersController(
             GetOpenedPlayersDataUseCase getOpenedPlayersDataUseCase,
             GetPlayerDataUseCase getPlayerDataUseCase,
             GetAllVotesUseCase getAllVotesUseCase

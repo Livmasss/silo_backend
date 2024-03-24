@@ -1,4 +1,4 @@
-package com.livmas.silo_web.presenter.models.rest.responses;
+package com.livmas.silo_web.communication.models.rest.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

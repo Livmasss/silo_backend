@@ -1,13 +1,12 @@
-package com.livmas.silo_web.presenter.controllers;
+package com.livmas.silo_web.communication.controllers;
 
 import com.livmas.silo_web.domain.models.PlayerModel;
 import com.livmas.silo_web.domain.models.RoomVisitor;
-import com.livmas.silo_web.domain.rooms.Room;
 import com.livmas.silo_web.domain.rooms.RoomsManager;
 import com.livmas.silo_web.domain.session.GameSession;
 import com.livmas.silo_web.domain.session.usecases.GetRandomPlayerModelUseCase;
-import com.livmas.silo_web.presenter.models.sock.ConnectMessage;
-import com.livmas.silo_web.presenter.models.sock.RoomVisitorMessage;
+import com.livmas.silo_web.communication.models.sock.ConnectMessage;
+import com.livmas.silo_web.communication.models.sock.RoomVisitorMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +20,16 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-public class RoomWSController {
+public class RoomsWSController {
     @Autowired
-    public RoomWSController(
+    public RoomsWSController(
             RoomsManager manager,
             GetRandomPlayerModelUseCase getRandomPlayerModelUseCase
     ) {
         this.roomsManager = manager;
         this.getRandomPlayerModelUseCase = getRandomPlayerModelUseCase;
     }
-    Logger logger = LoggerFactory.getLogger(SpringApplication.class);
+    Logger logger = LoggerFactory.getLogger(RoomsWSController.class);
     private final RoomsManager roomsManager;
     private final GetRandomPlayerModelUseCase getRandomPlayerModelUseCase;
 
