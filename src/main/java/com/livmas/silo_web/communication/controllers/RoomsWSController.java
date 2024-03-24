@@ -1,16 +1,15 @@
 package com.livmas.silo_web.communication.controllers;
 
+import com.livmas.silo_web.communication.models.sock.ConnectMessage;
+import com.livmas.silo_web.communication.models.sock.RoomVisitorMessage;
 import com.livmas.silo_web.domain.models.PlayerModel;
 import com.livmas.silo_web.domain.models.RoomVisitor;
 import com.livmas.silo_web.domain.rooms.RoomsManager;
 import com.livmas.silo_web.domain.session.GameSession;
 import com.livmas.silo_web.domain.session.usecases.GetRandomPlayerModelUseCase;
-import com.livmas.silo_web.communication.models.sock.ConnectMessage;
-import com.livmas.silo_web.communication.models.sock.RoomVisitorMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -41,7 +40,7 @@ public class RoomsWSController {
         try {
             roomsManager.connectToRoom(roomId, connectMessage.name);
             List<RoomVisitor> visitors = roomsManager.readRoomVisitors(roomId);
-            logger.info("Connection to room: " + roomId);
+            logger.info("Connection to room: %s".formatted(roomId));
 
             message.addAll(visitors.stream().map( visitor ->
                     visitor.name
@@ -63,7 +62,7 @@ public class RoomsWSController {
             return player;
         }).toList());
 
-        logger.info("Game started in room: " + roomId.toString());
+        logger.info("Game started in room: %s".formatted(roomId.toString()));
         return "";
     }
 
