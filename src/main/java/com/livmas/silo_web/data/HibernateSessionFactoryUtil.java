@@ -8,6 +8,7 @@ import org.hibernate.service.ServiceRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.Properties;
 
 public class HibernateSessionFactoryUtil {
@@ -33,16 +34,10 @@ public class HibernateSessionFactoryUtil {
         }
     }
 
-    private static void initiateProperties(Configuration configuration) {
+    private static void initiateProperties(Configuration configuration) throws IOException {
         //Create Properties, can be read from property files too
         Properties props = new Properties();
-        props.put("hibernate.hbm2ddl.auto", "create");
-        props.put("hibernate.connection.driver_class", "org.postgresql.Driver");
-        props.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/bunkerDB");
-        props.put("hibernate.connection.username", "postgres");
-        props.put("hibernate.connection.password", "livmas");
-        props.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-        props.put("hibernate.current_session_context_class", "thread");
+        props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("hibernate-dev.properties"));
 
         configuration.setProperties(props);
     }

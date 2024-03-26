@@ -1,7 +1,6 @@
 package com.livmas.silo_web.data.daos;
 
 import com.livmas.silo_web.data.HibernateSessionFactoryUtil;
-import com.livmas.silo_web.data.entities.HealthEntity;
 import com.livmas.silo_web.data.entities.PropertyEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -9,7 +8,7 @@ import org.hibernate.Transaction;
 import java.util.UUID;
 
 public abstract class PropertyDao implements BaseDao<PropertyEntity> {
-
+//    protected Class<PropertyEntity> aClass;
     @Override
     public void createItem(PropertyEntity item) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
