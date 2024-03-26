@@ -1,0 +1,13 @@
+INSERT INTO professions(name, frequency) VALUES ('Строитель', 0.7);
+INSERT INTO professions(name, frequency) VALUES('Медсестра', 0.5);
+INSERT INTO professions(name, frequency) VALUES('Хирург', 0.5);
+INSERT INTO professions(name, frequency) VALUES('Уролог', 0.5);
+INSERT INTO professions(name, frequency) VALUES('Слесарь', 0.5);
+INSERT INTO professions(name, frequency) VALUES('Электрик', 0.5);
+INSERT INTO professions(name, frequency) VALUES('Программист', 0.7);
+INSERT INTO professions(name, frequency) VALUES('Продавец-консультант', 0.3);
+INSERT INTO professions(name, frequency) VALUES('Безработный', 0.2);
+INSERT INTO professions(name, frequency) VALUES('Автомеханик', 0.5);
+INSERT INTO professions(name, frequency) VALUES('Организатеор мероприятий', 0.3);
+INSERT INTO professions(name, frequency) VALUES('Бизнесмен', 0.3);
+INSERT INTO professions(name, frequency) VALUES('Учитель физики', 0.5);

@@ -5,10 +5,10 @@ import jakarta.persistence.*;
 @MappedSuperclass
 public abstract class PropertyEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
-    @Column(name = "frequency")
+    @Column(columnDefinition = "real default 0.5")
     private float frequency = 0.5f;
 
     public void setName(String name) {
@@ -17,7 +17,7 @@ public abstract class PropertyEntity {
     public String getName() {
         return name;
     }
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
