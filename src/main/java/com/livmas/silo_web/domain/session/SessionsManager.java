@@ -1,12 +1,9 @@
 package com.livmas.silo_web.domain.session;
 
 import com.livmas.silo_web.domain.models.PlayerModel;
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,7 +11,7 @@ import java.util.UUID;
 public class SessionsManager {
 
     @Autowired
-    public SessionsManager(List<GameSession> sessions, ApplicationContext context) {
+    public SessionsManager(List<GameSession> sessions) {
         this.sessions = sessions;
     }
 
@@ -23,11 +20,27 @@ public class SessionsManager {
     public void createNewSession(GameSession session) {
         sessions.add(session);
     }
-    public PlayerModel getPlayerDataSession(UUID roomId, int playerIndex) {
-        var gamesById = sessions.stream().filter(x -> x.getId().equals(roomId));
-        GameSession game = gamesById.findFirst().orElse(null);
 
+    public PlayerModel getSessionPlayerData(UUID roomId, int playerIndex) {
+        GameSession game = findGame(roomId);
         assert game != null;
         return game.getPlayer(playerIndex);
+    }
+
+    public int getPlayerIdByName(UUID roomId, String name) {
+        try {
+            GameSession game = findGame(roomId);
+            PlayerModel player = game.players.stream().filter(p -> p.name.equals(name)).findFirst().orElse(null);
+
+            return game.players.lastIndexOf(player);
+        }
+        catch (Exception e) {
+            return -1;
+        }
+    }
+
+    private GameSession findGame(UUID roomId) {
+        var gamesById = sessions.stream().filter(x -> x.getId().equals(roomId));
+        return gamesById.findFirst().orElse(null);
     }
 }

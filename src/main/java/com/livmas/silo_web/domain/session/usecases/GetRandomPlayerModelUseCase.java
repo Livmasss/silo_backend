@@ -6,13 +6,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class GetRandomPlayerModelUseCase {
 
-    int i = 0;
+    private int i = 0;
 
     public PlayerModel execute() {
-        i++;
 
-        return switch (i % 3) {
-            case 0: yield new PlayerModel(
+        return switch (i++ % 3) {
+            case 0 -> new PlayerModel(
                     10,
                     "Зубослеп",
                     "Мужчина",
@@ -25,7 +24,7 @@ public class GetRandomPlayerModelUseCase {
                     "Работал в Росгвардии",
                     "В этом голосовании ваш голос считается за 2"
             );
-            case 1: yield new PlayerModel(
+            case 1 -> new PlayerModel(
                     10,
                     "Евгения",
                     "Женщина",
@@ -38,7 +37,7 @@ public class GetRandomPlayerModelUseCase {
                     "Было 10 кошек",
                     "Поменяться карточками здоровья с любым игроком"
             );
-            default: yield new PlayerModel(
+            default -> new PlayerModel(
                     10,
                     "Кринжеслав",
                     "Мужчина",

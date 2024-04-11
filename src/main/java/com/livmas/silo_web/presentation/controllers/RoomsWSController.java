@@ -67,7 +67,8 @@ public class RoomsWSController {
                             PlayerModel player = getRandomPlayerModelUseCase.execute();
                             player.name = visitor.name;
                             return player;
-                        }).toList())
+                        }).toList()
+                )
         );
 
 
