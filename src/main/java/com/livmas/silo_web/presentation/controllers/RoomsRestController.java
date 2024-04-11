@@ -1,11 +1,10 @@
-package com.livmas.silo_web.communication.controllers;
+package com.livmas.silo_web.presentation.controllers;
 
 import com.livmas.silo_web.domain.rooms.RoomsManager;
-import com.livmas.silo_web.communication.models.rest.requests.CreateRoomRequest;
-import com.livmas.silo_web.communication.models.rest.responses.CreateRoomResponse;
+import com.livmas.silo_web.presentation.models.rest.requests.CreateRoomRequest;
+import com.livmas.silo_web.presentation.models.rest.responses.CreateRoomResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;

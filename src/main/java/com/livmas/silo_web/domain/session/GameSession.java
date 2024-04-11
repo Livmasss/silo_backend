@@ -7,14 +7,22 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 
-@Component
-@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class GameSession {
-    @Autowired
-    public GameSession(List<PlayerModel> players) {
+    private UUID roomId;
+
+    public GameSession(UUID roomId, List<PlayerModel> players) {
         this.players = players;
+        this.roomId = roomId;
     }
 
-    private List<PlayerModel> players;
+    public List<PlayerModel> players;
+
+    public UUID getId() {
+        return roomId;
+    }
+    public PlayerModel getPlayer(int index) {
+        return players.get(index);
+    }
 }

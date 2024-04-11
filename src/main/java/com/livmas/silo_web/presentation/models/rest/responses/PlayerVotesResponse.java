@@ -1,4 +1,4 @@
-package com.livmas.silo_web.communication.models.rest.responses;
+package com.livmas.silo_web.presentation.models.rest.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.livmas.silo_web.domain.models.PlayerVotesModel;

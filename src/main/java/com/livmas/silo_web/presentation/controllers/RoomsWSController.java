@@ -1,7 +1,8 @@
-package com.livmas.silo_web.communication.controllers;
+package com.livmas.silo_web.presentation.controllers;
 
-import com.livmas.silo_web.communication.models.sock.ConnectMessage;
-import com.livmas.silo_web.communication.models.sock.RoomVisitorMessage;
+import com.livmas.silo_web.domain.session.SessionsManager;
+import com.livmas.silo_web.presentation.models.sock.ConnectMessage;
+import com.livmas.silo_web.presentation.models.sock.RoomVisitorMessage;
 import com.livmas.silo_web.domain.models.PlayerModel;
 import com.livmas.silo_web.domain.models.RoomVisitor;
 import com.livmas.silo_web.domain.rooms.RoomsManager;
@@ -20,17 +21,21 @@ import java.util.UUID;
 
 @Controller
 public class RoomsWSController {
-    @Autowired
-    public RoomsWSController(
-            RoomsManager manager,
-            GetRandomPlayerModelUseCase getRandomPlayerModelUseCase
-    ) {
-        this.roomsManager = manager;
-        this.getRandomPlayerModelUseCase = getRandomPlayerModelUseCase;
-    }
-    Logger logger = LoggerFactory.getLogger(RoomsWSController.class);
+    private final SessionsManager sessionManager;
+    private final Logger logger = LoggerFactory.getLogger(RoomsWSController.class);
     private final RoomsManager roomsManager;
     private final GetRandomPlayerModelUseCase getRandomPlayerModelUseCase;
+
+    @Autowired
+    public RoomsWSController(
+            RoomsManager roomManager,
+            SessionsManager sessionManager,
+            GetRandomPlayerModelUseCase getRandomPlayerModelUseCase
+    ) {
+        this.sessionManager = sessionManager;
+        this.roomsManager = roomManager;
+        this.getRandomPlayerModelUseCase = getRandomPlayerModelUseCase;
+    }
 
     @MessageMapping("/connect_to_room/{room_id}")
     @SendTo("/rooms/{room_id}")
@@ -56,11 +61,15 @@ public class RoomsWSController {
     @MessageMapping("/start_game/{room_id}")
     @SendTo("/game_started/{room_id}")
     public String startGame(@DestinationVariable("room_id") UUID roomId) {
-        new GameSession(roomsManager.readRoomVisitors(roomId).stream().map(visitor -> {
-            PlayerModel player = getRandomPlayerModelUseCase.execute();
-            player.name = visitor.name;
-            return player;
-        }).toList());
+        sessionManager.createNewSession(
+                new GameSession(roomId,
+                        roomsManager.readRoomVisitors(roomId).stream().map(visitor -> {
+                            PlayerModel player = getRandomPlayerModelUseCase.execute();
+                            player.name = visitor.name;
+                            return player;
+                        }).toList())
+        );
+
 
         logger.info("Game started in room: %s".formatted(roomId.toString()));
         return "";

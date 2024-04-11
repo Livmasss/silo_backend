@@ -1,12 +1,15 @@
-package com.livmas.silo_web.communication.controllers;
+package com.livmas.silo_web.presentation.controllers;
 
 
 import com.livmas.silo_web.domain.session.usecases.GetAllVotesUseCase;
 import com.livmas.silo_web.domain.session.usecases.GetOpenedPlayersDataUseCase;
 import com.livmas.silo_web.domain.session.usecases.GetPlayerDataUseCase;
-import com.livmas.silo_web.communication.models.rest.responses.*;
+import com.livmas.silo_web.presentation.models.rest.responses.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
+import java.util.logging.Logger;
 
 @RestController
 public class PlayersController {
@@ -26,7 +29,7 @@ public class PlayersController {
     private final GetAllVotesUseCase getAllVotesUseCase;
 
     @GetMapping("/api/player_data/{room_id}")
-    public PlayerResponse getPlayerData(@PathVariable("room_id") int roomId, @RequestParam("player_id") int playerId) {
+    public PlayerResponse getPlayerData(@PathVariable("room_id") UUID roomId, @RequestParam("player_id") int playerId) {
         return new PlayerResponse(
                 getPlayerDataUseCase.execute(roomId, playerId)
         );
