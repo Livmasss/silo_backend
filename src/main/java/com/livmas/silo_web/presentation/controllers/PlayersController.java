@@ -1,10 +1,10 @@
 package com.livmas.silo_web.presentation.controllers;
 
 
-import com.livmas.silo_web.domain.session.usecases.GetAllVotesUseCase;
-import com.livmas.silo_web.domain.session.usecases.GetOpenedPlayersDataUseCase;
-import com.livmas.silo_web.domain.session.usecases.GetPlayerDataUseCase;
-import com.livmas.silo_web.domain.session.usecases.GetPlayerIdUseCase;
+import com.livmas.silo_web.domain.usecases.GetAllVotesUseCase;
+import com.livmas.silo_web.domain.usecases.GetOpenedPlayersDataUseCase;
+import com.livmas.silo_web.domain.usecases.GetPlayerDataUseCase;
+import com.livmas.silo_web.domain.usecases.GetPlayerIdUseCase;
 import com.livmas.silo_web.presentation.models.rest.responses.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

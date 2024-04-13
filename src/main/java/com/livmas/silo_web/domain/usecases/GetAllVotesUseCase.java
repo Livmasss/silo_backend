@@ -1,4 +1,4 @@
-package com.livmas.silo_web.domain.session.usecases;
+package com.livmas.silo_web.domain.usecases;
 
 import com.livmas.silo_web.domain.models.PlayerVotesModel;
 import org.springframework.stereotype.Component;

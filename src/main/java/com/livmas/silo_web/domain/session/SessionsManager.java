@@ -1,6 +1,8 @@
 package com.livmas.silo_web.domain.session;
 
+import com.livmas.silo_web.domain.PlayerPropertyName;
 import com.livmas.silo_web.domain.models.PlayerModel;
+import com.livmas.silo_web.domain.models.PlayerProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +32,9 @@ public class SessionsManager {
     public int getPlayerIdByName(UUID roomId, String name) {
         try {
             GameSession game = findGame(roomId);
-            PlayerModel player = game.players.stream().filter(p -> p.name.equals(name)).findFirst().orElse(null);
+            PlayerModel player = game.players.stream().filter(p ->
+                p.get(PlayerPropertyName.name).getContent().equals(name)
+            ).findFirst().orElse(null);
 
             return game.players.lastIndexOf(player);
         }
