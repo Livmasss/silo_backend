@@ -1,7 +1,5 @@
 package com.livmas.silo_web.presentation.controllers;
 
-import com.livmas.silo_web.domain.PlayerPropertyName;
-import com.livmas.silo_web.domain.models.PlayerProperty;
 import com.livmas.silo_web.domain.session.SessionsManager;
 import com.livmas.silo_web.presentation.models.sock.ConnectMessage;
 import com.livmas.silo_web.presentation.models.sock.RoomVisitorMessage;
@@ -67,7 +65,7 @@ public class RoomsWSController {
                 new GameSession(roomId,
                         roomsManager.readRoomVisitors(roomId).stream().map(visitor -> {
                             PlayerModel player = getRandomPlayerModelUseCase.execute();
-                            player.putProp(PlayerPropertyName.name, visitor.name);
+                            player.setName(visitor.name);
                             return player;
                         }).toList()
                 )

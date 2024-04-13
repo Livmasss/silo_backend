@@ -43,12 +43,11 @@ public class PlayersController {
 
     @GetMapping("/api/player_id/{room_id}")
     public int getPlayerId(@PathVariable("room_id") UUID roomId, @RequestParam("player_id") String name) {
-        int id = getPlayerIdUseCase.execute(roomId, name);
-        return id;
+        return getPlayerIdUseCase.execute(roomId, name);
     }
 
     @GetMapping("/api/players_open_data/{room_id}")
-    public AllPlayersResponse getAllPlayersData(@PathVariable("room_id") int roomId) {
+    public AllPlayersResponse getAllPlayersData(@PathVariable("room_id") UUID roomId) {
         return new AllPlayersResponse(
                 getOpenedPlayersDataUseCase.execute(roomId).stream().map(
                         OpenedPlayerResponse::new
@@ -57,7 +56,7 @@ public class PlayersController {
     }
 
     @GetMapping("/api/players_votes/{room_id}")
-    public AllVotesResponse getActionsData(@PathVariable("room_id") int roomId) {
+    public AllVotesResponse getActionsData(@PathVariable("room_id") UUID roomId) {
         return new AllVotesResponse(
                 getAllVotesUseCase.execute(roomId).stream().map(
                         PlayerVotesResponse::new

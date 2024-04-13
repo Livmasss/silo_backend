@@ -15,8 +15,8 @@ public class GetRandomPlayerModelUseCase {
         return switch (i++ % 3) {
             case 0 -> new PlayerModel(
                     10,
+                    "Зубослеп",
                     List.of(
-                            "Зубослеп",
                             "Мужчина",
                             "Спид",
                             "Уверенный",
@@ -30,8 +30,8 @@ public class GetRandomPlayerModelUseCase {
             );
             case 1 -> new PlayerModel(
                     10,
+                    "Евгения",
                     List.of(
-                            "Евгения",
                             "Женщина",
                             "Идеально здоров",
                             "Интроверт",
@@ -45,8 +45,8 @@ public class GetRandomPlayerModelUseCase {
             );
             default -> new PlayerModel(
                     10,
+                    "Кринжеслав",
                     List.of(
-                        "Кринжеслав",
                         "Мужчина",
                         "Дерматит",
                         "Кринжовый",

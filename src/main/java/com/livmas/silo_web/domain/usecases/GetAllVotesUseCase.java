@@ -5,10 +5,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class GetAllVotesUseCase {
-    public List<PlayerVotesModel> execute(int room_id) {
+    public List<PlayerVotesModel> execute(UUID roomId) {
         List<PlayerVotesModel> list = new ArrayList<>();
 
         List<Integer> votes0 = new ArrayList<>(1);

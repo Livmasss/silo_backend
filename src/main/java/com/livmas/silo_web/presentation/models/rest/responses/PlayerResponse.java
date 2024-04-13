@@ -1,6 +1,6 @@
 package com.livmas.silo_web.presentation.models.rest.responses;
 
-import com.livmas.silo_web.domain.PlayerPropertyName;
+import com.livmas.silo_web.domain.models.enums.PlayerPropertyName;
 import com.livmas.silo_web.domain.models.PlayerModel;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,14 +21,14 @@ public class PlayerResponse {
 
     public PlayerResponse(PlayerModel model) {
         this.id = model.getId();
-        this.gender = model.get(PlayerPropertyName.gender).getContent();
-        this.health = model.get(PlayerPropertyName.health).getContent();
-        this.personality = model.get(PlayerPropertyName.personality).getContent();
-        this.profession = model.get(PlayerPropertyName.profession).getContent();
-        this.hobby = model.get(PlayerPropertyName.hobby).getContent();
-        this.phobia = model.get(PlayerPropertyName.phobia).getContent();
-        this.inventory = model.get(PlayerPropertyName.inventory).getContent();
-        this.information = model.get(PlayerPropertyName.information).getContent();
-        this.action = model.get(PlayerPropertyName.action).getContent();
+        this.gender = model.get(PlayerPropertyName.GENDER).getContent();
+        this.health = model.get(PlayerPropertyName.HEALTH).getContent();
+        this.personality = model.get(PlayerPropertyName.PERSONALITY).getContent();
+        this.profession = model.get(PlayerPropertyName.PROFESSION).getContent();
+        this.hobby = model.get(PlayerPropertyName.HOBBY).getContent();
+        this.phobia = model.get(PlayerPropertyName.PHOBIA).getContent();
+        this.inventory = model.get(PlayerPropertyName.INVENTORY).getContent();
+        this.information = model.get(PlayerPropertyName.INFORMATION).getContent();
+        this.action = model.get(PlayerPropertyName.ACTION).getContent();
     }
 }
