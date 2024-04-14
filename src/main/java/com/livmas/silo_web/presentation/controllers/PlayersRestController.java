@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
-public class PlayersController {
+public class PlayersRestController {
     @Autowired
-    public PlayersController(
+    public PlayersRestController(
             GetOpenedPlayersDataUseCase getOpenedPlayersDataUseCase,
             GetPlayerDataUseCase getPlayerDataUseCase,
             GetPlayerIdUseCase getPlayerIdUseCase,
@@ -48,11 +48,14 @@ public class PlayersController {
 
     @GetMapping("/api/players_open_data/{room_id}")
     public AllPlayersResponse getAllPlayersData(@PathVariable("room_id") UUID roomId) {
-        return new AllPlayersResponse(
+        AllPlayersResponse response = new AllPlayersResponse(
                 getOpenedPlayersDataUseCase.execute(roomId).stream().map(
                         OpenedPlayerResponse::new
                 ).toList()
         );
+
+        System.out.println(response);
+        return response;
     }
 
     @GetMapping("/api/players_votes/{room_id}")

@@ -12,30 +12,30 @@ public class GetAllVotesUseCase {
     public List<PlayerVotesModel> execute(UUID roomId) {
         List<PlayerVotesModel> list = new ArrayList<>();
 
-        List<Integer> votes0 = new ArrayList<>(1);
-        votes0.add(1);
-        votes0.add(2);
-
-        List<Integer> votes1 = new ArrayList<>(1);
-        votes1.add(0);
-
-        list.add(
-                new PlayerVotesModel(
-                        0, votes0
-                )
-        );
-
-        list.add(
-                new PlayerVotesModel(
-                        1, votes1
-                )
-        );
-
-        list.add(
-                new PlayerVotesModel(
-                        2, new ArrayList<>()
-                )
-        );
+//        List<Integer> votes0 = new ArrayList<>(1);
+//        votes0.add(1);
+//        votes0.add(2);
+//
+//        List<Integer> votes1 = new ArrayList<>(1);
+//        votes1.add(0);
+//
+//        list.add(
+//                new PlayerVotesModel(
+//                        0, votes0
+//                )
+//        );
+//
+//        list.add(
+//                new PlayerVotesModel(
+//                        1, votes1
+//                )
+//        );
+//
+//        list.add(
+//                new PlayerVotesModel(
+//                        2, new ArrayList<>()
+//                )
+//        );
 
         return list;
     }

@@ -13,11 +13,11 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
-    private static final Logger logger = LoggerFactory.getLogger(SpringApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(WebSocketConfiguration.class);
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/pong", "/rooms", "/game_started");
+        config.enableSimpleBroker("/pong", "/rooms", "/game_started", "/game");
         config.setApplicationDestinationPrefixes("/app");
     }
 
