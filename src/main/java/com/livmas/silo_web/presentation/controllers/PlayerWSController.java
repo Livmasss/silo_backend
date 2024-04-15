@@ -1,8 +1,6 @@
 package com.livmas.silo_web.presentation.controllers;
 
-import com.livmas.silo_web.domain.exceptions.PropertyAlreadyOpenedException;
 import com.livmas.silo_web.domain.models.OpenedPlayerModel;
-import com.livmas.silo_web.domain.session.SessionsManager;
 import com.livmas.silo_web.domain.usecases.GetOpenedPlayersDataUseCase;
 import com.livmas.silo_web.domain.usecases.OpenPlayerPropertyUseCase;
 import com.livmas.silo_web.presentation.models.sock.OpenPropertyMessage;

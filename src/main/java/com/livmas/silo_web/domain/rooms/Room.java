@@ -15,6 +15,6 @@ public class Room {
     }
 
     public List<RoomVisitor> getVisitors() {
-        return players.stream().toList();
+        return players;
     }
 }

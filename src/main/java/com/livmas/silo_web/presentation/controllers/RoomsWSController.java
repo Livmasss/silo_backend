@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
 public class RoomsWSController {
@@ -61,16 +62,18 @@ public class RoomsWSController {
     @MessageMapping("/start_game/{room_id}")
     @SendTo("/game_started/{room_id}")
     public String startGame(@DestinationVariable("room_id") UUID roomId) {
+        AtomicInteger currPlayerId = new AtomicInteger();
         sessionManager.createNewSession(
                 new GameSession(roomId,
                         roomsManager.readRoomVisitors(roomId).stream().map(visitor -> {
                             PlayerModel player = getRandomPlayerModelUseCase.execute();
                             player.setName(visitor.name);
+                            player.setId(currPlayerId.get());
+                            currPlayerId.getAndIncrement();
                             return player;
                         }).toList()
                 )
         );
-
 
         logger.info("Game started in room: %s".formatted(roomId.toString()));
         return "";
