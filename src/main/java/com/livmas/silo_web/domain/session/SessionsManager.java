@@ -42,7 +42,7 @@ public class SessionsManager {
     }
 
     public GameSession findGame(UUID roomId) {
-        var gamesById = sessions.stream().filter(x -> x.getId().equals(roomId));
+        var gamesById = sessions.stream().filter(x -> x.getRoomId().equals(roomId));
         return gamesById.findFirst().orElse(null);
     }
 }

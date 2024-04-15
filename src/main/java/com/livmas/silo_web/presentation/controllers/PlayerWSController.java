@@ -20,7 +20,6 @@ import java.util.UUID;
 
 @Controller
 public class PlayerWSController {
-    private final SessionsManager sessionManager;
     private final GetOpenedPlayersDataUseCase getOpenedPlayersDataUseCase;
     private final OpenPlayerPropertyUseCase openPlayerPropertyUseCase;
     private final Logger logger = LoggerFactory.getLogger(PlayerWSController.class);
@@ -28,11 +27,9 @@ public class PlayerWSController {
 
     @Autowired
     public PlayerWSController(
-            SessionsManager sessionManager,
             GetOpenedPlayersDataUseCase getOpenedPlayersDataUseCase,
             OpenPlayerPropertyUseCase openPlayerPropertyUseCase
     ) {
-        this.sessionManager = sessionManager;
         this.getOpenedPlayersDataUseCase = getOpenedPlayersDataUseCase;
         this.openPlayerPropertyUseCase = openPlayerPropertyUseCase;
     }
@@ -44,11 +41,10 @@ public class PlayerWSController {
         try {
             openPlayerPropertyUseCase.execute(roomId, message.getPlayerId(), message.getProperty());
         }
-        catch (PropertyAlreadyOpenedException e) {
+        catch (Exception e) {
             return Collections.emptyList();
         }
 
-        logger.info("Property %s opened in game: %s".formatted(message.getProperty().name(), roomId.toString()));
         return getOpenedPlayersDataUseCase.execute(roomId);
     }
 }

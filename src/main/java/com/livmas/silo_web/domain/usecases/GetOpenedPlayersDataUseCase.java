@@ -31,9 +31,9 @@ public class GetOpenedPlayersDataUseCase {
                             playerModel.getOpenedContent(PlayerPropertyName.GENDER),
                             playerModel.getOpenedContent(PlayerPropertyName.HEALTH),
                             playerModel.getOpenedContent(PlayerPropertyName.PERSONALITY),
-                            playerModel.getContent(PlayerPropertyName.PROFESSION),
+                            playerModel.getOpenedContent(PlayerPropertyName.PROFESSION),
                             playerModel.getOpenedContent(PlayerPropertyName.HOBBY),
-                            playerModel.getContent(PlayerPropertyName.PHOBIA),
+                            playerModel.getOpenedContent(PlayerPropertyName.PHOBIA),
                             playerModel.getOpenedContent(PlayerPropertyName.INVENTORY),
                             playerModel.getOpenedContent(PlayerPropertyName.INFORMATION),
                             playerModel.getOpenedContent(PlayerPropertyName.ACTION)
