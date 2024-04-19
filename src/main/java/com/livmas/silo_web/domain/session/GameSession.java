@@ -1,7 +1,11 @@
 package com.livmas.silo_web.domain.session;
 
+import com.livmas.silo_web.domain.exceptions.OpenPropertyInForeignTurnException;
+import com.livmas.silo_web.domain.exceptions.PropertyAlreadyOpenedException;
 import com.livmas.silo_web.domain.models.PlayerModel;
+import com.livmas.silo_web.domain.models.PlayerProperty;
 import com.livmas.silo_web.domain.models.enums.GameStep;
+import com.livmas.silo_web.domain.models.enums.PlayerPropertyName;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,6 +37,14 @@ public class GameSession {
             currentPlayerId = 0;
             step = GameStep.VOTING;
         }
+    }
+
+    public void openProperty(int playerId, PlayerPropertyName propertyName) throws PropertyAlreadyOpenedException {
+        PlayerProperty property = players.get(playerId).get(propertyName);
+        if (property.isOpened())
+            throw new PropertyAlreadyOpenedException();
+
+        property.setOpened(true);
     }
 
     public PlayerModel getPlayer(int index) {
