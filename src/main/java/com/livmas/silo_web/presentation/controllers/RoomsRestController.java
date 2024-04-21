@@ -21,7 +21,7 @@ public class RoomsRestController {
     @PostMapping("/api/rooms")
     public CreateRoomResponse createRoom(@RequestBody CreateRoomRequest request) {
         UUID id = roomsManager.createNewRoom(request.name());
-        logger.info("Room created with id: " + id + "Creator name: " + request.name());
+        logger.info("Room created with id: %sCreator name: %s".formatted(id, request.name()));
         return new CreateRoomResponse(id);
     }
 }

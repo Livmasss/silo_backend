@@ -6,8 +6,6 @@ import com.livmas.silo_web.domain.usecases.GetOpenedPlayersDataUseCase;
 import com.livmas.silo_web.domain.usecases.OpenPlayerPropertyUseCase;
 import com.livmas.silo_web.domain.usecases.UsePlayerActionUseCase;
 import com.livmas.silo_web.presentation.models.sock.OpenPropertyMessage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -23,7 +21,6 @@ public class PlayerWSController {
     private final GetOpenedPlayersDataUseCase getOpenedPlayersDataUseCase;
     private final OpenPlayerPropertyUseCase openPlayerPropertyUseCase;
     private final UsePlayerActionUseCase usePlayerActionUseCase;
-    private final Logger logger = LoggerFactory.getLogger(PlayerWSController.class);
 
 
     @Autowired
