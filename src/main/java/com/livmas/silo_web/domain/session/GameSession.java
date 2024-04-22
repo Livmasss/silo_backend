@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,9 +17,9 @@ import java.util.UUID;
 public class GameSession {
     private final UUID roomId;
     private int currentPlayerId = 0;
-    private GameStep step = GameStep.NOT_STARTED;
+    private GameStep step;
     public final List<PlayerModel> players;
-    private HashMap<Integer, Integer> votes = new HashMap<>();
+    private HashMap<Integer, Integer> votes = createVotesMap();
 
     public GameSession(UUID roomId, List<PlayerModel> players) {
         this.players = players;
@@ -38,7 +37,8 @@ public class GameSession {
     }
 
     public void endVoting() {
-
+        votes.clear();
+        step = GameStep.PROPERTIES_OPENING;
     }
 
     public void openProperty(int playerId, PlayerPropertyName propertyName) throws PropertyAlreadyOpenedException {
@@ -51,5 +51,9 @@ public class GameSession {
 
     public PlayerModel getPlayer(int index) {
         return players.get(index);
+    }
+
+    private HashMap<Integer, Integer> createVotesMap() {
+        return new HashMap<>();
     }
 }

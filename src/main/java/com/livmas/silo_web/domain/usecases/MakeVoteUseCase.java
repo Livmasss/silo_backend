@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Component
 public class MakeVoteUseCase {
-    private SessionsManager sessionsManager;
+    private final SessionsManager sessionsManager;
     public MakeVoteUseCase(
             SessionsManager sessionsManager
     ) {

@@ -1,7 +1,7 @@
 package com.livmas.silo_web.presentation.controllers;
 
 
-import com.livmas.silo_web.domain.usecases.GetAllVotesUseCase;
+import com.livmas.silo_web.domain.usecases.GetAllVoteTargetsUseCase;
 import com.livmas.silo_web.domain.usecases.GetOpenedPlayersDataUseCase;
 import com.livmas.silo_web.domain.usecases.GetPlayerDataUseCase;
 import com.livmas.silo_web.domain.usecases.GetPlayerIdUseCase;
@@ -21,18 +21,18 @@ public class PlayersRestController {
             GetOpenedPlayersDataUseCase getOpenedPlayersDataUseCase,
             GetPlayerDataUseCase getPlayerDataUseCase,
             GetPlayerIdUseCase getPlayerIdUseCase,
-            GetAllVotesUseCase getAllVotesUseCase
+            GetAllVoteTargetsUseCase getAllVoteTargetsUseCase
     ) {
         this.getOpenedPlayersDataUseCase = getOpenedPlayersDataUseCase;
         this.getPlayerDataUseCase = getPlayerDataUseCase;
         this.getPlayerIdUseCase = getPlayerIdUseCase;
-        this.getAllVotesUseCase = getAllVotesUseCase;
+        this.getAllVoteTargetsUseCase = getAllVoteTargetsUseCase;
     }
 
     private final GetOpenedPlayersDataUseCase getOpenedPlayersDataUseCase;
     private final GetPlayerDataUseCase getPlayerDataUseCase;
     private final GetPlayerIdUseCase getPlayerIdUseCase;
-    private final GetAllVotesUseCase getAllVotesUseCase;
+    private final GetAllVoteTargetsUseCase getAllVoteTargetsUseCase;
 
     @GetMapping("/api/player_data/{room_id}")
     public PlayerResponse getPlayerData(@PathVariable("room_id") UUID roomId, @RequestParam("player_id") int playerId) {
@@ -48,20 +48,18 @@ public class PlayersRestController {
 
     @GetMapping("/api/players_open_data/{room_id}")
     public AllPlayersResponse getAllPlayersData(@PathVariable("room_id") UUID roomId) {
-        AllPlayersResponse response = new AllPlayersResponse(
+
+        return new AllPlayersResponse(
                 getOpenedPlayersDataUseCase.execute(roomId).stream().map(
                         OpenedPlayerResponse::new
                 ).toList()
         );
-
-        System.out.println(response);
-        return response;
     }
 
     @GetMapping("/api/players_votes/{room_id}")
     public AllVotesResponse getActionsData(@PathVariable("room_id") UUID roomId) {
         return new AllVotesResponse(
-                getAllVotesUseCase.execute(roomId).stream().map(
+                getAllVoteTargetsUseCase.execute(roomId).stream().map(
                         PlayerVotesResponse::new
                 ).toList()
         );
