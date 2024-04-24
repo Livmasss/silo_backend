@@ -22,9 +22,9 @@ public class GetOpenedPlayersDataUseCase {
 
     public List<OpenedPlayerModel> execute(UUID roomId) {
         List<OpenedPlayerModel> list = new ArrayList<>();
-        List<PlayerModel> player = sessionsManager.findGame(roomId).players;
+        List<PlayerModel> players = sessionsManager.findGame(roomId).getAlivePlayers();
 
-        for (PlayerModel playerModel : player) {
+        for (PlayerModel playerModel : players) {
             list.add(
                     new OpenedPlayerModel(
                             playerModel.getName(),

@@ -24,9 +24,11 @@ public class GetAllVoteTargetsUseCase {
         if (!game.getVotes().isEmpty())
             return VotesMapper.mapToPlayerVotesModel(game.getVotes());
 
-        return new ArrayList<>(
-                game.getPlayers().stream().map(
+        var result = new ArrayList<>(
+                game.getAlivePlayers().stream().map(
                         p -> new PlayerVotesModel(p.getId(), new LinkedList<>())
                 ).toList());
+
+        return result;
     }
 }

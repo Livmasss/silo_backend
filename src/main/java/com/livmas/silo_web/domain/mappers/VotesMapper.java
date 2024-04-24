@@ -1,6 +1,7 @@
 package com.livmas.silo_web.domain.mappers;
 
 import com.livmas.silo_web.domain.models.PlayerVotesModel;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -21,8 +22,11 @@ public class VotesMapper {
             result.get(target).add(votedPlayer);
         });
 
-        return result.keySet().stream().map(key ->
+        var mappedResult = result.keySet().stream().map(key ->
                 new PlayerVotesModel(key, result.get(key))
         ).toList();
+
+        LoggerFactory.getLogger(VotesMapper.class).info("Votes count: %s".formatted(mappedResult.size()));
+        return mappedResult;
     }
 }

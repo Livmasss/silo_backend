@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
-public class PlayersRestController {
+public class PlayerRestController {
     @Autowired
-    public PlayersRestController(
+    public PlayerRestController(
             GetOpenedPlayersDataUseCase getOpenedPlayersDataUseCase,
             GetPlayerDataUseCase getPlayerDataUseCase,
             GetPlayerIdUseCase getPlayerIdUseCase,

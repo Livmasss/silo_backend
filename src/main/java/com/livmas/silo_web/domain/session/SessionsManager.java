@@ -30,11 +30,11 @@ public class SessionsManager {
     public int getPlayerIdByName(UUID roomId, String name) {
         try {
             GameSession game = findGame(roomId);
-            PlayerModel player = game.players.stream().filter(p ->
+            PlayerModel player = game.getPlayers().stream().filter(p ->
                 p.getName().equals(name)
             ).findFirst().orElse(null);
 
-            return game.players.lastIndexOf(player);
+            return game.getPlayers().lastIndexOf(player);
         }
         catch (Exception e) {
             return -1;

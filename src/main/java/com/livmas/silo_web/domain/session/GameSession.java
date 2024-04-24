@@ -20,7 +20,7 @@ public class GameSession {
     private final UUID roomId;
     private int currentPlayerId = 0;
     private GameStep step;
-    public final List<PlayerModel> players;
+    private final List<PlayerModel> players;
     private HashMap<Integer, Integer> votes = createVotesMap();
     private Logger logger = LoggerFactory.getLogger(GameSession.class);
 
@@ -35,6 +35,7 @@ public class GameSession {
             goToNextAlivePlayer();
         }
         catch (ArrayIndexOutOfBoundsException e) {
+            votes.clear();
             step = GameStep.VOTING;
             currentPlayerId = -1;
             logger.info("Voting started in room: %s".formatted(roomId));
@@ -46,7 +47,6 @@ public class GameSession {
         ).toList();
     }
     public void finishVoting() {
-        votes.clear();
         step = GameStep.PROPERTIES_OPENING;
     }
 
