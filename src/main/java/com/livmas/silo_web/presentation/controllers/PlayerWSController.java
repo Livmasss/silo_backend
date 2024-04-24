@@ -2,9 +2,9 @@ package com.livmas.silo_web.presentation.controllers;
 
 import com.livmas.silo_web.domain.exceptions.WrongUseCaseException;
 import com.livmas.silo_web.domain.models.OpenedPlayerModel;
-import com.livmas.silo_web.domain.usecases.GetOpenedPlayersDataUseCase;
-import com.livmas.silo_web.domain.usecases.OpenPlayerPropertyUseCase;
-import com.livmas.silo_web.domain.usecases.UsePlayerActionUseCase;
+import com.livmas.silo_web.domain.usecases.players.GetOpenedPlayersDataUseCase;
+import com.livmas.silo_web.domain.usecases.players.OpenPlayerPropertyUseCase;
+import com.livmas.silo_web.domain.usecases.players.UsePlayerActionUseCase;
 import com.livmas.silo_web.presentation.models.sock.OpenPropertyMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;

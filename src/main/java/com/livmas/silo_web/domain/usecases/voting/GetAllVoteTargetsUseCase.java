@@ -1,4 +1,4 @@
-package com.livmas.silo_web.domain.usecases;
+package com.livmas.silo_web.domain.usecases.voting;
 
 import com.livmas.silo_web.domain.mappers.VotesMapper;
 import com.livmas.silo_web.domain.models.PlayerVotesModel;

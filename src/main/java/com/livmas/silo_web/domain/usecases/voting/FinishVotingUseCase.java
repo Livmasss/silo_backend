@@ -1,4 +1,4 @@
-package com.livmas.silo_web.domain.usecases;
+package com.livmas.silo_web.domain.usecases.voting;
 
 import com.livmas.silo_web.domain.exceptions.NotAllVotesException;
 import com.livmas.silo_web.domain.exceptions.WrongStepException;

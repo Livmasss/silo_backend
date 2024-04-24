@@ -7,7 +7,7 @@ import com.livmas.silo_web.domain.models.PlayerModel;
 import com.livmas.silo_web.domain.models.RoomVisitor;
 import com.livmas.silo_web.domain.rooms.RoomsManager;
 import com.livmas.silo_web.domain.session.GameSession;
-import com.livmas.silo_web.domain.usecases.GetRandomPlayerModelUseCase;
+import com.livmas.silo_web.domain.usecases.players.GetRandomPlayerModelUseCase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

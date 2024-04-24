@@ -1,8 +1,8 @@
 package com.livmas.silo_web.presentation.controllers;
 
-import com.livmas.silo_web.domain.usecases.FinishVotingUseCase;
-import com.livmas.silo_web.domain.usecases.GetAllVotesUseCase;
-import com.livmas.silo_web.domain.usecases.MakeVoteUseCase;
+import com.livmas.silo_web.domain.usecases.voting.FinishVotingUseCase;
+import com.livmas.silo_web.domain.usecases.voting.GetAllVotesUseCase;
+import com.livmas.silo_web.domain.usecases.voting.MakeVoteUseCase;
 import com.livmas.silo_web.presentation.models.rest.requests.MakeVoteRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
