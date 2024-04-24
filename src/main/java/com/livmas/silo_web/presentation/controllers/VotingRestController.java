@@ -12,10 +12,9 @@ import java.util.UUID;
 
 @RestController
 public class VotingRestController {
-    private MakeVoteUseCase makeVoteUseCase;
-    private GetAllVotesUseCase getAllVotesUseCase;
-    private FinishVotingUseCase finishVotingUseCase;
-    private Logger logger = LoggerFactory.getLogger(VotingRestController.class);
+    private final MakeVoteUseCase makeVoteUseCase;
+    private final FinishVotingUseCase finishVotingUseCase;
+    private final Logger logger = LoggerFactory.getLogger(VotingRestController.class);
 
     public VotingRestController(
             MakeVoteUseCase makeVoteUseCase,
@@ -23,7 +22,6 @@ public class VotingRestController {
             FinishVotingUseCase finishVotingUseCase
     ) {
         this.makeVoteUseCase = makeVoteUseCase;
-        this.getAllVotesUseCase = getAllVotesUseCase;
         this.finishVotingUseCase = finishVotingUseCase;
     }
 

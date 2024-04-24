@@ -7,6 +7,8 @@ import com.livmas.silo_web.domain.models.enums.GameStep;
 import com.livmas.silo_web.domain.models.enums.PlayerPropertyName;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +22,7 @@ public class GameSession {
     private GameStep step;
     public final List<PlayerModel> players;
     private HashMap<Integer, Integer> votes = createVotesMap();
+    private Logger logger = LoggerFactory.getLogger(GameSession.class);
 
     public GameSession(UUID roomId, List<PlayerModel> players) {
         this.players = players;
@@ -28,17 +31,27 @@ public class GameSession {
     }
 
     public void nextTurn() {
-        if (currentPlayerId + 1 != getPlayers().size())
-            currentPlayerId = currentPlayerId + 1;
-        else {
-            currentPlayerId = 0;
+        try {
+            goToNextAlivePlayer();
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
             step = GameStep.VOTING;
+            currentPlayerId = -1;
+            logger.info("Voting started in room: %s".formatted(roomId));
         }
     }
 
-    public void endVoting() {
+    public List<PlayerModel> getAlivePlayers() {
+        return players.stream().filter(PlayerModel::getIsAlive
+        ).toList();
+    }
+    public void finishVoting() {
         votes.clear();
         step = GameStep.PROPERTIES_OPENING;
+    }
+
+    public void killPlayer(int playerId) {
+        players.get(playerId).setIsAlive(false);
     }
 
     public void openProperty(int playerId, PlayerPropertyName propertyName) throws PropertyAlreadyOpenedException {
@@ -49,6 +62,12 @@ public class GameSession {
         property.setOpened(true);
     }
 
+    private void goToNextAlivePlayer() throws ArrayIndexOutOfBoundsException {
+        currentPlayerId++;
+        while (Boolean.FALSE.equals(players.get(currentPlayerId).getIsAlive()))
+            currentPlayerId++;
+        logger.info("Next player to open property: %s".formatted(currentPlayerId));
+    }
     public PlayerModel getPlayer(int index) {
         return players.get(index);
     }

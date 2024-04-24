@@ -14,6 +14,7 @@ import java.util.List;
 public class PlayerModel extends HashMap<PlayerPropertyName, PlayerProperty> {
     private int id;
     private String name;
+    private Boolean isAlive = true;
 
     public PlayerModel(
             int id,

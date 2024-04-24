@@ -13,7 +13,7 @@ public class PlayerVotesResponse {
     public List<Integer> votedPlayersIds;
 
     public PlayerVotesResponse(PlayerVotesModel model) {
-        this.playerId = model.playerId;
-        this.votedPlayersIds = model.votedPlayersIds;
+        this.playerId = model.getPlayerId();
+        this.votedPlayersIds = model.getVotedPlayersIds();
     }
 }
