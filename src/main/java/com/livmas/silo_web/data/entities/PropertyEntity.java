@@ -1,8 +1,14 @@
 package com.livmas.silo_web.data.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @MappedSuperclass
+@Getter
+@Setter
+@NoArgsConstructor
 public abstract class PropertyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,20 +17,11 @@ public abstract class PropertyEntity {
     @Column(columnDefinition = "real default 0.5")
     private float frequency = 0.5f;
 
-    public void setName(String name) {
+    protected PropertyEntity(
+            String name,
+            float frequency
+    ) {
         this.name = name;
-    }
-    public String getName() {
-        return name;
-    }
-    public Long getId() {
-        return id;
-    }
-
-    public float getFrequency() {
-        return frequency;
-    }
-    public void setFrequency(float frequency) {
         this.frequency = frequency;
     }
 }

@@ -7,27 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CatastropheServiceImpl implements CatastropheService {
-    CatastropheRepository repository;
+public class CatastropheServiceImpl
+        extends BaseServiceImpl<CatastropheEntity, CatastropheRepository>
+        implements CatastropheService {
     @Autowired
-    public CatastropheServiceImpl(
-            CatastropheRepository repository
-    ) {
-        this.repository = repository;
-    }
-
-    @Override
-    public CatastropheEntity getEntity() {
-        return repository.findAll().get(0);
-    }
-
-    @Override
-    public void deleteEntity(CatastropheEntity entity) {
-        repository.delete(entity);
-    }
-
-    @Override
-    public void saveEntity(CatastropheEntity entity) {
-        repository.save(entity);
+    public CatastropheServiceImpl(CatastropheRepository repository) {
+        super(repository);
     }
 }

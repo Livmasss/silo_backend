@@ -20,7 +20,7 @@ public class SpringConfiguration {
         return new LinkedList<>();
     }
     @Bean(name="entityManagerFactory")
-    public SessionFactory getSessionFactory() {
+    public SessionFactory sessionFactory() {
         return HibernateSessionFactoryUtil.getSessionFactory();
     }
     @Bean(name = "transactionManager")
@@ -28,7 +28,7 @@ public class SpringConfiguration {
         JpaTransactionManager transactionManager
                 = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(
-                getSessionFactory()
+                sessionFactory()
         );
         return transactionManager;
     }
