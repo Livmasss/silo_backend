@@ -5,6 +5,7 @@ import com.livmas.silo_web.domain.usecases.voting.GetAllVoteTargetsUseCase;
 import com.livmas.silo_web.domain.usecases.players.GetOpenedPlayersDataUseCase;
 import com.livmas.silo_web.domain.usecases.players.GetPlayerDataUseCase;
 import com.livmas.silo_web.domain.usecases.players.GetPlayerIdUseCase;
+import com.livmas.silo_web.presentation.mappers.PlayerMapper;
 import com.livmas.silo_web.presentation.models.rest.responses.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,7 +52,7 @@ public class PlayerRestController {
 
         return new AllPlayersResponse(
                 getOpenedPlayersDataUseCase.execute(roomId).stream().map(
-                        OpenedPlayerResponse::new
+                        PlayerMapper::openedResponseFromOpenedModel
                 ).toList()
         );
     }

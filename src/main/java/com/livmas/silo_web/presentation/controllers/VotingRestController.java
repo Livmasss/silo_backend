@@ -1,6 +1,5 @@
 package com.livmas.silo_web.presentation.controllers;
 
-import com.livmas.silo_web.domain.usecases.voting.FinishVotingUseCase;
 import com.livmas.silo_web.domain.usecases.voting.MakeVoteUseCase;
 import com.livmas.silo_web.presentation.models.rest.requests.MakeVoteRequest;
 import org.slf4j.Logger;
@@ -15,8 +14,7 @@ public class VotingRestController {
     private final Logger logger = LoggerFactory.getLogger(VotingRestController.class);
 
     public VotingRestController(
-            MakeVoteUseCase makeVoteUseCase,
-            FinishVotingUseCase finishVotingUseCase
+            MakeVoteUseCase makeVoteUseCase
     ) {
         this.makeVoteUseCase = makeVoteUseCase;
     }

@@ -2,8 +2,8 @@ package com.livmas.silo_web.domain.usecases.players;
 
 import com.livmas.silo_web.domain.models.OpenedPlayerModel;
 import com.livmas.silo_web.domain.models.PlayerModel;
-import com.livmas.silo_web.domain.models.enums.PlayerPropertyName;
 import com.livmas.silo_web.domain.session.SessionsManager;
+import com.livmas.silo_web.presentation.mappers.PlayerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,18 +26,7 @@ public class GetOpenedPlayersDataUseCase {
 
         for (PlayerModel playerModel : players) {
             list.add(
-                    new OpenedPlayerModel(
-                            playerModel.getName(),
-                            playerModel.getOpenedContent(PlayerPropertyName.GENDER),
-                            playerModel.getOpenedContent(PlayerPropertyName.HEALTH),
-                            playerModel.getOpenedContent(PlayerPropertyName.PERSONALITY),
-                            playerModel.getOpenedContent(PlayerPropertyName.PROFESSION),
-                            playerModel.getOpenedContent(PlayerPropertyName.HOBBY),
-                            playerModel.getOpenedContent(PlayerPropertyName.PHOBIA),
-                            playerModel.getOpenedContent(PlayerPropertyName.INVENTORY),
-                            playerModel.getOpenedContent(PlayerPropertyName.INFORMATION),
-                            playerModel.getOpenedContent(PlayerPropertyName.ACTION)
-                    ));
+                    PlayerMapper.openedResponseFromModel(playerModel));
         }
         return list;
     }

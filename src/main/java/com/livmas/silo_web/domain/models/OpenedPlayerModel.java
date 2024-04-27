@@ -1,38 +1,22 @@
 package com.livmas.silo_web.domain.models;
 
-public class OpenedPlayerModel {
-    public String name;
-    public String gender;
-    public String health;
-    public String personality;
-    public String profession;
-    public String hobby;
-    public String phobia;
-    public String inventory;
-    public String information;
-    public String action;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-    public OpenedPlayerModel(
-        String name,
-        String gender,
-        String health,
-        String personality,
-        String profession,
-        String hobby,
-        String phobia,
-        String inventory,
-        String information,
-        String action
-    ) {
-        this.name = name;
-        this.gender = gender;
-        this.health = health;
-        this.personality = personality;
-        this.profession = profession;
-        this.hobby = hobby;
-        this.phobia = phobia;
-        this.inventory = inventory;
-        this.information = information;
-        this.action = action;
-    }
+@Setter
+@Getter
+@AllArgsConstructor
+public class OpenedPlayerModel {
+    private int id;
+    private String name;
+    private String gender;
+    private String health;
+    private String personality;
+    private String profession;
+    private String hobby;
+    private String phobia;
+    private String inventory;
+    private String information;
+    private String action;
 }

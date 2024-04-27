@@ -1,31 +1,26 @@
 package com.livmas.silo_web.data;
 
-import com.livmas.silo_web.data.entities.ProfessionEntity;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import com.livmas.silo_web.data.entities.CatastropheEntity;
+import com.livmas.silo_web.data.services.impl.CatastropheServiceImpl;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+
+
+@SpringBootTest
 class HibernateTests {
+    @Autowired
+    CatastropheServiceImpl catastropheService;
+
     @Test
-    void mainHibernateTest() {
-        ProfessionEntity profession = new ProfessionEntity();
-        profession.setName("Учитель биологии");
+    void CatastropheRepositoryTest() {
+        CatastropheEntity entity = new CatastropheEntity("Зомбу апокалиптик", "Мир захватили зомбу...");
 
-        //Get Session
-        SessionFactory sessionFactory = HibernateSessionFactoryUtil.getSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
-        //start transaction
-        session.beginTransaction();
-        //Save the Model object
-        session.save(profession);
-        //Commit transaction
-        session.getTransaction().commit();
-        System.out.println("Profession ID="+ profession.getId());
+        CatastropheEntity firstCatastrophe = catastropheService.getEntity();
 
-//        ProfessionEntity profession1 = session.get(SessionFactory.class, profession.getId());
-
-        //terminate session factory, otherwise program won't end
-        sessionFactory.close();
+        Assertions.assertEquals(entity.getName(), firstCatastrophe.getName());
+        Assertions.assertEquals(entity.getDescription(), firstCatastrophe.getDescription());
     }
-
 }
