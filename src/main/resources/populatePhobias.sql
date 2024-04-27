@@ -1,0 +1,15 @@
+INSERT INTO Phobias(name, frequency) VALUES('Тетрафобия', 0.2);
+INSERT INTO Phobias(name, frequency) VALUES('Коулрофобия', 1);
+INSERT INTO Phobias(name, frequency) VALUES('Аблутофобия', 0.2);
+INSERT INTO Phobias(name, frequency) VALUES('Авиафобия', 0.8);
+INSERT INTO Phobias(name, frequency) VALUES('Агорафобия', 0.2);
+INSERT INTO Phobias(name, frequency) VALUES('Контрелтофобия', 0.7);
+INSERT INTO Phobias(name, frequency) VALUES('Акрофобия', 0.6);
+INSERT INTO Phobias(name, frequency) VALUES('Андрофобия', 0.4);
+INSERT INTO Phobias(name, frequency) VALUES('Бациллофобия', 0.2);
+INSERT INTO Phobias(name, frequency) VALUES('Венерофобия', 0.5);
+INSERT INTO Phobias(name, frequency) VALUES('Гелеофобия', 0.2);
+INSERT INTO Phobias(name, frequency) VALUES('Геронтофобия', 0.3);
+INSERT INTO Phobias(name, frequency) VALUES('Дентофобия', 0.5);
+INSERT INTO Phobias(name, frequency) VALUES('Зоофобия', 0.2);
+INSERT INTO Phobias(name, frequency) VALUES('Копрофобия', 0.1);
