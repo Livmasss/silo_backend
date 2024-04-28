@@ -1,63 +1,34 @@
 package com.livmas.silo_web.domain.usecases.players;
 
+import com.livmas.silo_web.data.services.AllPropertiesService;
 import com.livmas.silo_web.domain.models.PlayerModel;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class GetRandomPlayerModelUseCase {
 
-    private int i = 0;
+    AllPropertiesService propertiesService;
 
     public PlayerModel execute() {
-
-        return switch (i++ % 3) {
-            case 0 -> new PlayerModel(
+         return new PlayerModel(
                     10,
-                    "Зубослеп",
+                    null,
                     List.of(
-                            "Мужчина",
-                            "Спид",
-                            "Уверенный",
-                            "Гид по туалетам",
-                            "Геймер",
-                            "Клоунофобия",
-                            "Виагра",
-                            "Работал в Росгвардии",
-                            "В этом голосовании ваш голос считается за 2"
+                            propertiesService.getGender().getName(),
+                            propertiesService.getHealth().getName(),
+                            propertiesService.getCharacter().getName(),
+                            propertiesService.getProfession().getName(),
+                            propertiesService.getHobby().getName(),
+                            propertiesService.getPhobia().getName(),
+                            propertiesService.getInventory().getName(),
+                            propertiesService.getInformation().getName(),
+                            propertiesService.getAction().getName()
                     )
             );
-            case 1 -> new PlayerModel(
-                    10,
-                    "Евгения",
-                    List.of(
-                            "Женщина",
-                            "Идеально здоров",
-                            "Интроверт",
-                            "Студент",
-                            "Настольные игры",
-                            "Нет фобий",
-                            "Ремонтный набор",
-                            "Было 10 кошек",
-                            "Поменяться карточками здоровья с любым игроком"
-                    )
-            );
-            default -> new PlayerModel(
-                    10,
-                    "Кринжеслав",
-                    List.of(
-                        "Мужчина",
-                        "Дерматит",
-                        "Кринжовый",
-                        "Клоун",
-                        "Кулинария",
-                        "Тетрафобия",
-                        "Кошачий корм",
-                        "Гомофоб",
-                        "Уменьшить количество еды в бункере в 2 раза"
-                    )
-            );
-        };
     }
 }

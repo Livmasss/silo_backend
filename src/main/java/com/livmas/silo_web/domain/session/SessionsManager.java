@@ -1,6 +1,7 @@
 package com.livmas.silo_web.domain.session;
 
 import com.livmas.silo_web.domain.models.PlayerModel;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -43,6 +44,11 @@ public class SessionsManager {
 
     public GameSession findGame(UUID roomId) {
         var gamesById = sessions.stream().filter(x -> x.getRoomId().equals(roomId));
-        return gamesById.findFirst().orElse(null);
+        var game = gamesById.findFirst();
+
+        if (game.isEmpty())
+            LoggerFactory.getLogger(SessionsManager.class).info("Game with id not found: ".formatted(roomId));
+
+        return game.orElse(null);
     }
 }

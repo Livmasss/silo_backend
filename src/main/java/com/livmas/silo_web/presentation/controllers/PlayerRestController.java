@@ -21,19 +21,16 @@ public class PlayerRestController {
     public PlayerRestController(
             GetOpenedPlayersDataUseCase getOpenedPlayersDataUseCase,
             GetPlayerDataUseCase getPlayerDataUseCase,
-            GetPlayerIdUseCase getPlayerIdUseCase,
-            GetAllVoteTargetsUseCase getAllVoteTargetsUseCase
+            GetPlayerIdUseCase getPlayerIdUseCase
     ) {
         this.getOpenedPlayersDataUseCase = getOpenedPlayersDataUseCase;
         this.getPlayerDataUseCase = getPlayerDataUseCase;
         this.getPlayerIdUseCase = getPlayerIdUseCase;
-        this.getAllVoteTargetsUseCase = getAllVoteTargetsUseCase;
     }
 
     private final GetOpenedPlayersDataUseCase getOpenedPlayersDataUseCase;
     private final GetPlayerDataUseCase getPlayerDataUseCase;
     private final GetPlayerIdUseCase getPlayerIdUseCase;
-    private final GetAllVoteTargetsUseCase getAllVoteTargetsUseCase;
 
     @GetMapping("/api/player_data/{room_id}")
     public PlayerResponse getPlayerData(@PathVariable("room_id") UUID roomId, @RequestParam("player_id") int playerId) {
@@ -53,15 +50,6 @@ public class PlayerRestController {
         return new AllPlayersResponse(
                 getOpenedPlayersDataUseCase.execute(roomId).stream().map(
                         PlayerMapper::openedResponseFromOpenedModel
-                ).toList()
-        );
-    }
-
-    @GetMapping("/api/players_votes/{room_id}")
-    public AllVotesResponse getActionsData(@PathVariable("room_id") UUID roomId) {
-        return new AllVotesResponse(
-                getAllVoteTargetsUseCase.execute(roomId).stream().map(
-                        PlayerVotesResponse::new
                 ).toList()
         );
     }
