@@ -1,8 +1,7 @@
 package com.livmas.silo_web.data;
 
-import com.livmas.silo_web.data.entities.HealthEntity;
-import com.livmas.silo_web.data.entities.CatastropheEntity;
-import com.livmas.silo_web.data.entities.ProfessionEntity;
+import com.livmas.silo_web.data.entities.BaseEntity;
+import com.livmas.silo_web.data.services.BaseService;
 import com.livmas.silo_web.data.services.impl.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -35,32 +34,65 @@ class HibernateTests {
     ProfessionServiceImpl professionService;
 
     @Test
-    void CatastropheServiceTest() {
-        CatastropheEntity entity = new CatastropheEntity("Зомбу апокалиптик", "Мир захватили зомбу...");
-
-        CatastropheEntity firstCatastrophe = catastropheService.getEntity();
-
-        Assertions.assertEquals(entity.getName(), firstCatastrophe.getName());
-        Assertions.assertEquals(entity.getDescription(), firstCatastrophe.getDescription());
+    void ActionServiceTest() {
+        BaseServiceTest(actionService);
     }
 
     @Test
-    void ProfessionServiceTest() {
-        ProfessionEntity entity = new ProfessionEntity("Строитель", 0.7f);
+    void CatastropheServiceTest() {
+        BaseServiceTest(catastropheService);
+    }
 
-        ProfessionEntity firstProfession = professionService.getEntity();
+    @Test
+    void CharacterServiceTest() {
+        BaseServiceTest(characterService);
+    }
 
-        Assertions.assertEquals(entity.getName(), firstProfession.getName());
-        Assertions.assertEquals(entity.getFrequency(), firstProfession.getFrequency());
+    @Test
+    void GenderServiceTest() {
+        BaseServiceTest(genderService);
     }
 
     @Test
     void HealthServiceTest() {
-        HealthEntity entity = new HealthEntity("ВИЧ", 0.2f);
+        BaseServiceTest(healthService);
+    }
 
-        HealthEntity firstHealth = healthService.getEntity();
+    @Test
+    void HobbyServiceTest() {
+        BaseServiceTest(hobbyService);
+    }
 
-        Assertions.assertEquals(entity.getName(), firstHealth.getName());
-        Assertions.assertEquals(entity.getFrequency(), firstHealth.getFrequency());
+    @Test
+    void InformationServiceTest() {
+        BaseServiceTest(informationService);
+    }
+
+    @Test
+    void InventoryServiceTest() {
+        BaseServiceTest(inventoryService);
+    }
+
+    @Test
+    void PhobiaServiceTest() {
+        BaseServiceTest(phobiaService);
+    }
+
+    @Test
+    void ProfessionServiceTest() {
+        BaseServiceTest(professionService);
+    }
+
+
+    <T extends BaseEntity> void BaseServiceTest(BaseService<T> service) {
+        for (int i = 0; i < 10; i++) {
+            T randomProperty = service.getEntity();
+            var foundedProperty = service.getById(randomProperty.getId());
+
+            Assertions.assertFalse(foundedProperty.isEmpty());
+
+            Assertions.assertEquals(foundedProperty.get().getName(), randomProperty.getName());
+            Assertions.assertEquals(foundedProperty.get().getFrequency(), randomProperty.getFrequency());
+        }
     }
 }

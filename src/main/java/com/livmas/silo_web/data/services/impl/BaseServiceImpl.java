@@ -1,11 +1,14 @@
 package com.livmas.silo_web.data.services.impl;
 
+import com.livmas.silo_web.data.repositories.BaseRepository;
 import com.livmas.silo_web.data.services.BaseService;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public class BaseServiceImpl<E, R extends JpaRepository<E, Long>> implements BaseService<E> {
+import java.util.List;
+import java.util.Optional;
+
+public abstract class BaseServiceImpl<E, R extends BaseRepository<E>> implements BaseService<E> {
     R repository;
-    public BaseServiceImpl(
+    protected BaseServiceImpl(
             R repository
     ) {
         this.repository = repository;
@@ -13,6 +16,16 @@ public class BaseServiceImpl<E, R extends JpaRepository<E, Long>> implements Bas
 
     @Override
     public E getEntity() {
-        return repository.findAll().get(0);
+        return repository.getRandom(1).get(0);
+    }
+
+    @Override
+    public List<E> getEntities(int rowsCount) {
+        return repository.getRandom(rowsCount);
+    }
+
+    @Override
+    public Optional<E> getById(Long id) {
+        return repository.findById(id);
     }
 }

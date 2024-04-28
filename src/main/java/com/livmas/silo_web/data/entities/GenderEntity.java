@@ -4,5 +4,5 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "genders")
-public class GenderEntity extends PropertyEntity{
+public class GenderEntity extends BaseEntity {
 }

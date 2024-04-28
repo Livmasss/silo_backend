@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "healths")
 @NoArgsConstructor
-public class HealthEntity extends PropertyEntity {
+public class HealthEntity extends BaseEntity {
     public HealthEntity(
             String name,
             float frequency

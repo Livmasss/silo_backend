@@ -5,5 +5,5 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "phobias")
-public class PhobiaEntity extends PropertyEntity {
+public class PhobiaEntity extends BaseEntity {
 }

@@ -12,18 +12,26 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CatastropheEntity {
+public class CatastropheEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
     private String description;
+
+    public CatastropheEntity(
+            String name,
+            String description,
+            float frequency
+    ) {
+        super(name, frequency);
+        this.description = description;
+    }
 
     public CatastropheEntity(
             String name,
             String description
     ) {
-        this.name = name;
+        super(name, 0.5f);
         this.description = description;
     }
 }

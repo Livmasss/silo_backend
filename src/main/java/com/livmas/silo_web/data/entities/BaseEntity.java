@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public abstract class PropertyEntity {
+public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,7 +17,7 @@ public abstract class PropertyEntity {
     @Column(columnDefinition = "real default 0.5")
     private float frequency = 0.5f;
 
-    protected PropertyEntity(
+    protected BaseEntity(
             String name,
             float frequency
     ) {
