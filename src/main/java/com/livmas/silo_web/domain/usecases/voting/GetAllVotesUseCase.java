@@ -2,6 +2,7 @@ package com.livmas.silo_web.domain.usecases.voting;
 
 import com.livmas.silo_web.domain.session.GameSession;
 import com.livmas.silo_web.domain.session.SessionsManager;
+import java.util.Collections;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -18,7 +19,12 @@ public class GetAllVotesUseCase {
     }
 
     public Map<Integer, Integer> execute(UUID roomId) {
-        GameSession game = sessionManager.findGame(roomId);
-        return game.getVotes();
+        try {
+            GameSession game = sessionManager.findGame(roomId);
+            return game.getVotes();
+        }
+        catch (Exception e) {
+            return Collections.emptyMap();
+        }
     }
 }

@@ -19,17 +19,22 @@ public class MakeVoteUseCase {
         this.sessionsManager = sessionsManager;
     }
     public void execute(UUID roomId, int playerId, int targetId) throws WrongStepException, PlayerIsDeadException {
-        GameSession game = sessionsManager.findGame(roomId);
+        try {
+            GameSession game = sessionsManager.findGame(roomId);
 
-        if (game.getStep() != GameStep.VOTING)
-            throw new WrongStepException();
+            if (game.getStep() != GameStep.VOTING)
+                throw new WrongStepException();
 
-        var alivePlayersIds = game.getAlivePlayers().stream().map(PlayerModel::getId).toList();
-        if (!alivePlayersIds.contains(playerId))
-            throw new PlayerIsDeadException();
-        if (!alivePlayersIds.contains(targetId))
-            throw new PlayerIsDeadException();
+            var alivePlayersIds = game.getAlivePlayers().stream().map(PlayerModel::getId).toList();
+            if (!alivePlayersIds.contains(playerId))
+                throw new PlayerIsDeadException();
+            if (!alivePlayersIds.contains(targetId))
+                throw new PlayerIsDeadException();
 
-        game.getVotes().put(playerId, targetId);
+            game.getVotes().put(playerId, targetId);
+        }
+        catch (Exception e ) {
+
+        }
     }
 }

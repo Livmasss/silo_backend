@@ -23,18 +23,22 @@ public class OpenPlayerPropertyUseCase {
     }
 
     public void execute(UUID sessionId, int playerId, PlayerPropertyName propertyName) throws PropertyAlreadyOpenedException, OpenPropertyInForeignTurnException, WrongUseCaseException, WrongStepException {
-        if (propertyName == PlayerPropertyName.ACTION)
-            throw new WrongUseCaseException();
+        try {
+            if (propertyName == PlayerPropertyName.ACTION)
+                throw new WrongUseCaseException();
 
-        GameSession game = sessionsManager.findGame(sessionId);
+            GameSession game = sessionsManager.findGame(sessionId);
 
-        if (game.getStep() != GameStep.PROPERTIES_OPENING)
-            throw new WrongStepException();
+            if (game.getStep() != GameStep.PROPERTIES_OPENING)
+                throw new WrongStepException();
 
-        if (game.getCurrentPlayerId() != playerId)
-            throw new OpenPropertyInForeignTurnException();
+            if (game.getCurrentPlayerId() != playerId)
+                throw new OpenPropertyInForeignTurnException();
 
-        game.openProperty(playerId, propertyName);
-        game.nextTurn();
+            game.openProperty(playerId, propertyName);
+            game.nextTurn();
+        }
+        catch (Exception e) {
+        }
     }
 }

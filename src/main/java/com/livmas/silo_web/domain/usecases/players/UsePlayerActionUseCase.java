@@ -19,8 +19,14 @@ public class UsePlayerActionUseCase {
     }
 
     public void execute(UUID sessionId, int playerId) throws PropertyAlreadyOpenedException {
-        GameSession game = sessionsManager.findGame(sessionId);
+        try {
 
-        game.openProperty(playerId, PlayerPropertyName.ACTION);
+            GameSession game = sessionsManager.findGame(sessionId);
+
+            game.openProperty(playerId, PlayerPropertyName.ACTION);
+        }
+        catch (Exception e) {
+
+        }
     }
 }

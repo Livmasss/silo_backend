@@ -19,16 +19,19 @@ public class GetAllVoteTargetsUseCase {
     }
 
     public List<PlayerVotesModel> execute(UUID roomId) {
-        GameSession game = sessionManager.findGame(roomId);
+        try {
+            GameSession game = sessionManager.findGame(roomId);
 
-        if (!game.getVotes().isEmpty())
-            return VotesMapper.mapToPlayerVotesModel(game.getVotes());
+            if (!game.getVotes().isEmpty())
+                return VotesMapper.mapToPlayerVotesModel(game.getVotes());
 
-        var result = new ArrayList<>(
-                game.getAlivePlayers().stream().map(
-                        p -> new PlayerVotesModel(p.getId(), new LinkedList<>())
-                ).toList());
-
-        return result;
+            return new ArrayList<>(
+                    game.getAlivePlayers().stream().map(
+                            p -> new PlayerVotesModel(p.getId(), new LinkedList<>())
+                    ).toList());
+        }
+        catch (Exception e) {
+            return Collections.emptyList();
+        }
     }
 }

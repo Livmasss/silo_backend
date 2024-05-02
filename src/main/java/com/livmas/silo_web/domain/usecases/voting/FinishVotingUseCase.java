@@ -30,27 +30,33 @@ public class FinishVotingUseCase {
         this.getAllVotesUseCase = getAllVotesUseCase;
     }
     public void execute(UUID roomId) throws NotAllVotesException, WrongStepException {
-        GameSession session = sessionsManager.findGame(roomId);
+        try {
 
-        if (session.getStep() != GameStep.VOTING)
-            throw new WrongStepException();
+            GameSession session = sessionsManager.findGame(roomId);
 
-        var votes = getAllVotesUseCase.execute(roomId);
+            if (session.getStep() != GameStep.VOTING)
+                throw new WrongStepException();
 
-        for (PlayerModel p : session.getAlivePlayers()) {
-            if (!votes.containsKey(p.getId())) {
-                throw new NotAllVotesException();
+            var votes = getAllVotesUseCase.execute(roomId);
+
+            for (PlayerModel p : session.getAlivePlayers()) {
+                if (!votes.containsKey(p.getId())) {
+                    throw new NotAllVotesException();
+                }
             }
+
+            List<PlayerVotesModel> targetVotes = VotesMapper.mapToPlayerVotesModel(votes);
+            var sortedVotes = new LinkedList<>(targetVotes.stream().sorted(Comparator.comparingInt(PlayerVotesModel::getVotedPlayersCount)).toList());
+            var playerToKill = sortedVotes.getLast();
+
+            LoggerFactory.getLogger(FinishVotingUseCase.class).info("Killed player: %s in room %s".formatted(playerToKill.getPlayerId(), session.getRoomId()));
+
+            session.killPlayer(playerToKill.getPlayerId());
+            session.finishVoting();
+            session.nextTurn();
         }
+        catch (Exception e) {
 
-        List<PlayerVotesModel> targetVotes = VotesMapper.mapToPlayerVotesModel(votes);
-        var sortedVotes = new LinkedList<>(targetVotes.stream().sorted(Comparator.comparingInt(PlayerVotesModel::getVotedPlayersCount)).toList());
-        var playerToKill = sortedVotes.getLast();
-
-        LoggerFactory.getLogger(FinishVotingUseCase.class).info("Killed player: %s in room %s".formatted(playerToKill.getPlayerId(), session.getRoomId()));
-
-        session.killPlayer(playerToKill.getPlayerId());
-        session.finishVoting();
-        session.nextTurn();
+        }
     }
 }

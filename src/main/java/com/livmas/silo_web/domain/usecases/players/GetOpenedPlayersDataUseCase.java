@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,12 +23,17 @@ public class GetOpenedPlayersDataUseCase {
 
     public List<OpenedPlayerModel> execute(UUID roomId) {
         List<OpenedPlayerModel> list = new ArrayList<>();
-        List<PlayerModel> players = sessionsManager.findGame(roomId).getAlivePlayers();
+        try {
+            List<PlayerModel> players = sessionsManager.findGame(roomId).getAlivePlayers();
 
-        for (PlayerModel playerModel : players) {
-            list.add(
-                    PlayerMapper.openedResponseFromModel(playerModel));
+            for (PlayerModel playerModel : players) {
+                list.add(
+                        PlayerMapper.openedResponseFromModel(playerModel));
+            }
+            return list;
         }
-        return list;
+        catch (Exception e) {
+            return Collections.emptyList();
+        }
     }
 }

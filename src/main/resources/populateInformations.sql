@@ -13,7 +13,10 @@ INSERT INTO informations(name, frequency) VALUES('Снимался в кино',
 INSERT INTO informations(name, frequency) VALUES('Не было сэкса', 0.5);
 INSERT INTO informations(name, frequency) VALUES('Седые волосы', 0.3);
 INSERT INTO informations(name, frequency) VALUES('Лысый', 0.4);
-INSERT INTO informations(name, frequency) VALUES('Четвертая группа крови', 0.1);
+INSERT INTO informations(name, frequency) VALUES('Четвертая группа крови', 0.3);
 INSERT INTO informations(name, frequency) VALUES('Умеет играть на гитаре', 0.6);
 INSERT INTO informations(name, frequency) VALUES('Умеет программировать', 0.6);
 INSERT INTO informations(name, frequency) VALUES('Работал автомехаником', 0.4);
+INSERT INTO informations(name, frequency) VALUES('Любит готовить', 0.4);
+INSERT INTO informations(name, frequency) VALUES('Увлекается Стэндапом', 0.4);
+INSERT INTO informations(name, frequency) VALUES('Служил в армии', 0.5);

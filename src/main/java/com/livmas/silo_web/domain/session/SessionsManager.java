@@ -1,11 +1,13 @@
 package com.livmas.silo_web.domain.session;
 
+import com.livmas.silo_web.domain.exceptions.GameNotFoundException;
 import com.livmas.silo_web.domain.models.PlayerModel;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Component
@@ -23,9 +25,14 @@ public class SessionsManager {
     }
 
     public PlayerModel getSessionPlayerData(UUID roomId, int playerIndex) {
-        GameSession game = findGame(roomId);
-        assert game != null;
-        return game.getPlayer(playerIndex);
+        try {
+            GameSession game = findGame(roomId);
+            assert game != null;
+            return game.getPlayer(playerIndex);
+        }
+        catch (Exception e){
+            return null;
+        }
     }
 
     public int getPlayerIdByName(UUID roomId, String name) {
@@ -42,12 +49,12 @@ public class SessionsManager {
         }
     }
 
-    public GameSession findGame(UUID roomId) {
+    public GameSession findGame(UUID roomId) throws GameNotFoundException {
         var gamesById = sessions.stream().filter(x -> x.getRoomId().equals(roomId));
         var game = gamesById.findFirst();
 
         if (game.isEmpty())
-            LoggerFactory.getLogger(SessionsManager.class).info("Game with id not found: ".formatted(roomId));
+            throw new GameNotFoundException();
 
         return game.orElse(null);
     }
