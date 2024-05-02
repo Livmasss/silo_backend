@@ -1,5 +1,6 @@
 package com.livmas.silo_web.domain.session;
 
+import com.livmas.silo_web.domain.exceptions.OpeningRoundFinishedException;
 import com.livmas.silo_web.domain.exceptions.PropertyAlreadyOpenedException;
 import com.livmas.silo_web.domain.models.PlayerModel;
 import com.livmas.silo_web.domain.models.PlayerProperty;
@@ -21,12 +22,14 @@ public class GameSession {
     private int currentPlayerId = 0;
     private GameStep step;
     private final List<PlayerModel> players;
+    private final int targetPlayersCount;
     private HashMap<Integer, Integer> votes = createVotesMap();
     private Logger logger = LoggerFactory.getLogger(GameSession.class);
 
-    public GameSession(UUID roomId, List<PlayerModel> players) {
+    public GameSession(UUID roomId, List<PlayerModel> players, int targetPlayersCount) {
         this.players = players;
         this.roomId = roomId;
+        this.targetPlayersCount = targetPlayersCount;
         this.step = GameStep.PROPERTIES_OPENING;
     }
 
@@ -34,20 +37,33 @@ public class GameSession {
         try {
             goToNextAlivePlayer();
         }
-        catch (ArrayIndexOutOfBoundsException e) {
-            step = GameStep.VOTING;
-            currentPlayerId = -1;
-            logger.info("Voting started in room: %s".formatted(roomId));
+        catch (OpeningRoundFinishedException e) {
+            if (hasExtraPlayers()) {
+                step = GameStep.VOTING;
+                currentPlayerId = -1;
+                logger.info("Voting started in room: %s".formatted(roomId));
+            }
         }
     }
 
+    public boolean hasExtraPlayers() {
+        return getAlivePlayers().size() > targetPlayersCount;
+    }
+
     public List<PlayerModel> getAlivePlayers() {
-        return players.stream().filter(PlayerModel::getIsAlive
+        return players.stream().filter(
+                PlayerModel::getIsAlive
         ).toList();
     }
     public void finishVoting() {
-        votes.clear();
-        step = GameStep.PROPERTIES_OPENING;
+        if (hasExtraPlayers()) {
+            votes.clear();
+            step = GameStep.PROPERTIES_OPENING;
+            return;
+        }
+
+        step = GameStep.FINISHED;
+        logger.info("Game finished: %s".formatted(roomId));
     }
 
     public void killPlayer(int playerId) {
@@ -62,11 +78,16 @@ public class GameSession {
         property.setOpened(true);
     }
 
-    private void goToNextAlivePlayer() throws ArrayIndexOutOfBoundsException {
-        currentPlayerId++;
-        while (Boolean.FALSE.equals(players.get(currentPlayerId).getIsAlive()))
+    private void goToNextAlivePlayer() throws OpeningRoundFinishedException {
+        try {
             currentPlayerId++;
-        logger.info("Next player to open property: %s".formatted(currentPlayerId));
+            while (Boolean.FALSE.equals(players.get(currentPlayerId).getIsAlive()))
+                currentPlayerId++;
+            logger.info("Next player to open property: %s".formatted(currentPlayerId));
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            throw new OpeningRoundFinishedException();
+        }
     }
     public PlayerModel getPlayer(int index) {
         return players.get(index);

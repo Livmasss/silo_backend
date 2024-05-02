@@ -1,18 +1,17 @@
-package com.livmas.silo_web.presentation.controllers;
+package com.livmas.silo_web.presentation.controllers.ws;
 
 import com.livmas.silo_web.domain.exceptions.WrongUseCaseException;
 import com.livmas.silo_web.domain.models.OpenedPlayerModel;
 import com.livmas.silo_web.domain.usecases.players.GetOpenedPlayersDataUseCase;
 import com.livmas.silo_web.domain.usecases.players.OpenPlayerPropertyUseCase;
 import com.livmas.silo_web.domain.usecases.players.UsePlayerActionUseCase;
-import com.livmas.silo_web.presentation.models.sock.OpenPropertyMessage;
+import com.livmas.silo_web.presentation.models.ws.OpenPropertyMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,11 +44,11 @@ public class PlayerWSController {
                 usePlayerActionUseCase.execute(roomId, message.getPlayerId());
             }
             catch (Exception e) {
-                return Collections.emptyList();
+                return getOpenedPlayersDataUseCase.execute(roomId);
             }
         }
         catch (Exception e) {
-            return Collections.emptyList();
+            return getOpenedPlayersDataUseCase.execute(roomId);
         }
 
         return getOpenedPlayersDataUseCase.execute(roomId);

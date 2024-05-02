@@ -1,7 +1,7 @@
 package com.livmas.silo_web.domain.usecases.voting;
 
 import com.livmas.silo_web.domain.session.GameSession;
-import com.livmas.silo_web.domain.session.SessionsManager;
+import com.livmas.silo_web.domain.session.GameSessionManager;
 import java.util.Collections;
 import org.springframework.stereotype.Component;
 
@@ -10,10 +10,10 @@ import java.util.UUID;
 
 @Component
 public class GetAllVotesUseCase {
-    SessionsManager sessionManager;
+    GameSessionManager sessionManager;
 
     public GetAllVotesUseCase(
-            SessionsManager sessionManager
+            GameSessionManager sessionManager
     ) {
         this.sessionManager = sessionManager;
     }

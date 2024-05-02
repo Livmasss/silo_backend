@@ -7,7 +7,7 @@ import com.livmas.silo_web.domain.models.PlayerModel;
 import com.livmas.silo_web.domain.models.PlayerVotesModel;
 import com.livmas.silo_web.domain.models.enums.GameStep;
 import com.livmas.silo_web.domain.session.GameSession;
-import com.livmas.silo_web.domain.session.SessionsManager;
+import com.livmas.silo_web.domain.session.GameSessionManager;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,20 +19,20 @@ import java.util.UUID;
 
 @Component
 public class FinishVotingUseCase {
-    private final SessionsManager sessionsManager;
+    private final GameSessionManager gameSessionManager;
     private final GetAllVotesUseCase getAllVotesUseCase;
     @Autowired
     public FinishVotingUseCase(
-            SessionsManager sessionsManager,
+            GameSessionManager gameSessionManager,
             GetAllVotesUseCase getAllVotesUseCase
     ) {
-        this.sessionsManager = sessionsManager;
+        this.gameSessionManager = gameSessionManager;
         this.getAllVotesUseCase = getAllVotesUseCase;
     }
     public void execute(UUID roomId) throws NotAllVotesException, WrongStepException {
         try {
 
-            GameSession session = sessionsManager.findGame(roomId);
+            GameSession session = gameSessionManager.findGame(roomId);
 
             if (session.getStep() != GameStep.VOTING)
                 throw new WrongStepException();

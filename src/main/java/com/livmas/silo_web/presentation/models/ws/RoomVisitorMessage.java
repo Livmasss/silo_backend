@@ -1,4 +1,4 @@
-package com.livmas.silo_web.presentation.models.sock;
+package com.livmas.silo_web.presentation.models.ws;
 
 import org.springframework.stereotype.Component;
 

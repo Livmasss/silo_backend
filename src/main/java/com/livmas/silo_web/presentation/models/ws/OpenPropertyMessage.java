@@ -1,4 +1,4 @@
-package com.livmas.silo_web.presentation.models.sock;
+package com.livmas.silo_web.presentation.models.ws;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.livmas.silo_web.domain.models.enums.PlayerPropertyName;

@@ -5,22 +5,22 @@ import com.livmas.silo_web.domain.exceptions.WrongStepException;
 import com.livmas.silo_web.domain.models.PlayerModel;
 import com.livmas.silo_web.domain.models.enums.GameStep;
 import com.livmas.silo_web.domain.session.GameSession;
-import com.livmas.silo_web.domain.session.SessionsManager;
+import com.livmas.silo_web.domain.session.GameSessionManager;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Component
 public class MakeVoteUseCase {
-    private final SessionsManager sessionsManager;
+    private final GameSessionManager gameSessionManager;
     public MakeVoteUseCase(
-            SessionsManager sessionsManager
+            GameSessionManager gameSessionManager
     ) {
-        this.sessionsManager = sessionsManager;
+        this.gameSessionManager = gameSessionManager;
     }
     public void execute(UUID roomId, int playerId, int targetId) throws WrongStepException, PlayerIsDeadException {
         try {
-            GameSession game = sessionsManager.findGame(roomId);
+            GameSession game = gameSessionManager.findGame(roomId);
 
             if (game.getStep() != GameStep.VOTING)
                 throw new WrongStepException();
@@ -33,7 +33,7 @@ public class MakeVoteUseCase {
 
             game.getVotes().put(playerId, targetId);
         }
-        catch (Exception e ) {
+        catch (Exception ignored ) {
 
         }
     }

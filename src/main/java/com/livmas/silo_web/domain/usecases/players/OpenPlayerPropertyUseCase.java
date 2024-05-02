@@ -7,19 +7,19 @@ import com.livmas.silo_web.domain.exceptions.WrongUseCaseException;
 import com.livmas.silo_web.domain.models.enums.GameStep;
 import com.livmas.silo_web.domain.models.enums.PlayerPropertyName;
 import com.livmas.silo_web.domain.session.GameSession;
-import com.livmas.silo_web.domain.session.SessionsManager;
+import com.livmas.silo_web.domain.session.GameSessionManager;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Component
 public class OpenPlayerPropertyUseCase {
-    private final SessionsManager sessionsManager;
+    private final GameSessionManager gameSessionManager;
 
     public OpenPlayerPropertyUseCase(
-            SessionsManager sessionsManager
+            GameSessionManager gameSessionManager
     ) {
-        this.sessionsManager = sessionsManager;
+        this.gameSessionManager = gameSessionManager;
     }
 
     public void execute(UUID sessionId, int playerId, PlayerPropertyName propertyName) throws PropertyAlreadyOpenedException, OpenPropertyInForeignTurnException, WrongUseCaseException, WrongStepException {
@@ -27,7 +27,7 @@ public class OpenPlayerPropertyUseCase {
             if (propertyName == PlayerPropertyName.ACTION)
                 throw new WrongUseCaseException();
 
-            GameSession game = sessionsManager.findGame(sessionId);
+            GameSession game = gameSessionManager.findGame(sessionId);
 
             if (game.getStep() != GameStep.PROPERTIES_OPENING)
                 throw new WrongStepException();

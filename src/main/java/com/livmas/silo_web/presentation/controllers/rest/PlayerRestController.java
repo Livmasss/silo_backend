@@ -1,7 +1,6 @@
-package com.livmas.silo_web.presentation.controllers;
+package com.livmas.silo_web.presentation.controllers.rest;
 
 
-import com.livmas.silo_web.domain.usecases.voting.GetAllVoteTargetsUseCase;
 import com.livmas.silo_web.domain.usecases.players.GetOpenedPlayersDataUseCase;
 import com.livmas.silo_web.domain.usecases.players.GetPlayerDataUseCase;
 import com.livmas.silo_web.domain.usecases.players.GetPlayerIdUseCase;

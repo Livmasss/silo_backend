@@ -3,17 +3,17 @@ package com.livmas.silo_web.domain.usecases.voting;
 import com.livmas.silo_web.domain.mappers.VotesMapper;
 import com.livmas.silo_web.domain.models.PlayerVotesModel;
 import com.livmas.silo_web.domain.session.GameSession;
-import com.livmas.silo_web.domain.session.SessionsManager;
+import com.livmas.silo_web.domain.session.GameSessionManager;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 
 @Component
 public class GetAllVoteTargetsUseCase {
-    SessionsManager sessionManager;
+    GameSessionManager sessionManager;
 
     public GetAllVoteTargetsUseCase(
-            SessionsManager sessionManager
+            GameSessionManager sessionManager
     ) {
         this.sessionManager = sessionManager;
     }

@@ -5,16 +5,14 @@ import com.livmas.silo_web.domain.models.PlayerModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @Component
-public class SessionsManager {
+public class GameSessionManager {
 
     @Autowired
-    public SessionsManager(List<GameSession> sessions) {
+    public GameSessionManager(List<GameSession> sessions) {
         this.sessions = sessions;
     }
 

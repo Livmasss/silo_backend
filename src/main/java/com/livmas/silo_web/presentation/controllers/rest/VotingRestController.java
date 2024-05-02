@@ -1,4 +1,4 @@
-package com.livmas.silo_web.presentation.controllers;
+package com.livmas.silo_web.presentation.controllers.rest;
 
 import com.livmas.silo_web.domain.usecases.voting.GetAllVoteTargetsUseCase;
 import com.livmas.silo_web.domain.usecases.voting.MakeVoteUseCase;
@@ -36,7 +36,7 @@ public class VotingRestController {
     }
 
     @GetMapping("/api/players_votes/{room_id}")
-    public AllVotesResponse getActionsData(@PathVariable("room_id") UUID roomId) {
+    public AllVotesResponse getAllVotesData(@PathVariable("room_id") UUID roomId) {
         try {
             return new AllVotesResponse(
                     getAllVoteTargetsUseCase.execute(roomId).stream().map(
