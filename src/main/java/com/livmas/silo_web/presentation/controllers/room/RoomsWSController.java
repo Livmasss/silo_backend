@@ -1,14 +1,11 @@
-package com.livmas.silo_web.presentation.controllers.ws;
+package com.livmas.silo_web.presentation.controllers.room;
 
 import com.livmas.silo_web.domain.exceptions.NotEnoughPlayersException;
-import com.livmas.silo_web.domain.session.GameSessionFactory;
-import com.livmas.silo_web.domain.session.GameSessionManager;
 import com.livmas.silo_web.domain.usecases.rooms.CreateGameSessionUseCase;
 import com.livmas.silo_web.presentation.models.ws.ConnectMessage;
 import com.livmas.silo_web.presentation.models.ws.RoomVisitorMessage;
 import com.livmas.silo_web.domain.models.RoomVisitor;
 import com.livmas.silo_web.domain.rooms.RoomsManager;
-import com.livmas.silo_web.domain.usecases.players.GetRandomPlayerModelUseCase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,25 +19,16 @@ import java.util.UUID;
 
 @Controller
 public class RoomsWSController {
-    private final GameSessionManager sessionManager;
-    private final GameSessionFactory gameSessionFactory;
     private final Logger logger = LoggerFactory.getLogger(RoomsWSController.class);
     private final RoomsManager roomsManager;
     private final CreateGameSessionUseCase createGameSessionUseCase;
-    private final GetRandomPlayerModelUseCase getRandomPlayerModelUseCase;
 
     @Autowired
     public RoomsWSController(
             RoomsManager roomManager,
-            GameSessionManager sessionManager,
-            GameSessionFactory gameSessionFactory,
-            GetRandomPlayerModelUseCase getRandomPlayerModelUseCase,
             CreateGameSessionUseCase createGameSessionUseCase
     ) {
-        this.sessionManager = sessionManager;
         this.roomsManager = roomManager;
-        this.gameSessionFactory = gameSessionFactory;
-        this.getRandomPlayerModelUseCase = getRandomPlayerModelUseCase;
         this.createGameSessionUseCase = createGameSessionUseCase;
     }
 
@@ -50,7 +38,7 @@ public class RoomsWSController {
         RoomVisitorMessage message = new RoomVisitorMessage();
 
         try {
-            roomsManager.connectToRoom(roomId, connectMessage.name);
+            roomsManager.connectToRoom(roomId, connectMessage.name());
             List<RoomVisitor> visitors = roomsManager.readRoomVisitors(roomId);
             logger.info("Connection to room: %s".formatted(roomId));
 
@@ -70,7 +58,8 @@ public class RoomsWSController {
     public Boolean startGame(@DestinationVariable("room_id") UUID roomId) {
         try {
             createGameSessionUseCase.execute(roomId);
-        } catch (NotEnoughPlayersException e) {
+        }
+        catch (NotEnoughPlayersException e) {
             logger.info("Game not started: not enough players");
             return Boolean.FALSE;
         }

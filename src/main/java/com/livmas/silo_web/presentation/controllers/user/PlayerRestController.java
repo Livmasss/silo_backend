@@ -1,4 +1,4 @@
-package com.livmas.silo_web.presentation.controllers.rest;
+package com.livmas.silo_web.presentation.controllers.user;
 
 
 import com.livmas.silo_web.domain.usecases.players.GetOpenedPlayersDataUseCase;
@@ -32,14 +32,14 @@ public class PlayerRestController {
     private final GetPlayerIdUseCase getPlayerIdUseCase;
 
     @GetMapping("/api/player_data/{room_id}")
-    public PlayerResponse getPlayerData(@PathVariable("room_id") UUID roomId, @RequestParam("player_id") int playerId) {
+    public PlayerResponse getPlayerData(@PathVariable("room_id") UUID roomId, @RequestParam("player_id") Integer playerId) {
         return new PlayerResponse(
                 getPlayerDataUseCase.execute(roomId, playerId)
         );
     }
 
     @GetMapping("/api/player_id/{room_id}")
-    public int getPlayerId(@PathVariable("room_id") UUID roomId, @RequestParam("player_id") String name) {
+    public int getPlayerId(@PathVariable("room_id") UUID roomId, @RequestParam("player_name") String name) {
         return getPlayerIdUseCase.execute(roomId, name);
     }
 

@@ -1,4 +1,4 @@
-package com.livmas.silo_web.presentation.controllers.rest;
+package com.livmas.silo_web.presentation.controllers.room;
 
 import com.livmas.silo_web.domain.rooms.RoomsManager;
 import com.livmas.silo_web.presentation.models.rest.requests.CreateRoomRequest;

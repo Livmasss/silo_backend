@@ -2,6 +2,8 @@ package com.livmas.silo_web.domain.session;
 
 import com.livmas.silo_web.domain.exceptions.OpeningRoundFinishedException;
 import com.livmas.silo_web.domain.exceptions.PropertyAlreadyOpenedException;
+import com.livmas.silo_web.domain.models.BunkerModel;
+import com.livmas.silo_web.domain.models.CatastropheModel;
 import com.livmas.silo_web.domain.models.PlayerModel;
 import com.livmas.silo_web.domain.models.PlayerProperty;
 import com.livmas.silo_web.domain.models.enums.GameStep;
@@ -21,16 +23,17 @@ public class GameSession {
     private final UUID roomId;
     private int currentPlayerId = 0;
     private GameStep step;
-    private final List<PlayerModel> players;
-    private final int targetPlayersCount;
+    private CatastropheModel catastrophe;
+    private BunkerModel bunker;
+    private List<PlayerModel> players;
+    private int targetPlayersCount;
     private HashMap<Integer, Integer> votes = createVotesMap();
     private Logger logger = LoggerFactory.getLogger(GameSession.class);
 
-    public GameSession(UUID roomId, List<PlayerModel> players, int targetPlayersCount) {
-        this.players = players;
+    public GameSession(
+            UUID roomId
+    ) {
         this.roomId = roomId;
-        this.targetPlayersCount = targetPlayersCount;
-        this.step = GameStep.PROPERTIES_OPENING;
     }
 
     public void nextTurn() {

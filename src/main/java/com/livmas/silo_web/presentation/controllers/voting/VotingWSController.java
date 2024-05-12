@@ -1,4 +1,4 @@
-package com.livmas.silo_web.presentation.controllers.ws;
+package com.livmas.silo_web.presentation.controllers.voting;
 
 import com.livmas.silo_web.domain.exceptions.GameNotFoundException;
 import com.livmas.silo_web.domain.usecases.voting.CheckIsGameFinishedUseCase;

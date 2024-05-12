@@ -1,4 +1,4 @@
-package com.livmas.silo_web.presentation.controllers.rest;
+package com.livmas.silo_web.presentation.controllers.voting;
 
 import com.livmas.silo_web.domain.usecases.voting.GetAllVoteTargetsUseCase;
 import com.livmas.silo_web.domain.usecases.voting.MakeVoteUseCase;

@@ -1,4 +1,4 @@
-package com.livmas.silo_web.presentation.controllers.ws;
+package com.livmas.silo_web.presentation.controllers.user;
 
 import com.livmas.silo_web.domain.exceptions.WrongUseCaseException;
 import com.livmas.silo_web.domain.models.OpenedPlayerModel;
