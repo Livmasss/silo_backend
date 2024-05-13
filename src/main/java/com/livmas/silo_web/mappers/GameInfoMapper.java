@@ -1,5 +1,6 @@
 package com.livmas.silo_web.mappers;
 
+import com.livmas.silo_web.data.entities.BunkerEntity;
 import com.livmas.silo_web.data.entities.CatastropheEntity;
 import com.livmas.silo_web.domain.models.BunkerModel;
 import com.livmas.silo_web.domain.models.CatastropheModel;
@@ -16,6 +17,13 @@ public abstract class GameInfoMapper {
                 dto.capacity()
         );
     }
+    public static BunkerDTO bunkerDataToDto(BunkerEntity entity) {
+        return new BunkerDTO(
+                entity.getName(),
+                null
+        );
+    }
+
     public static CatastropheModel catastropheDtoToDomain(CatastropheDto dto) {
         return new CatastropheModel(
                 dto.title(),

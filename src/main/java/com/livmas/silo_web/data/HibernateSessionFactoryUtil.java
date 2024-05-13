@@ -45,6 +45,7 @@ public class HibernateSessionFactoryUtil {
     private static void initiateTables(Configuration configuration) {
         //Player properties
         configuration.addAnnotatedClass(ActionEntity.class);
+        configuration.addAnnotatedClass(BunkerEntity.class);
         configuration.addAnnotatedClass(CharacterEntity.class);
         configuration.addAnnotatedClass(GenderEntity.class);
         configuration.addAnnotatedClass(HealthEntity.class);

@@ -13,7 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class HibernateTests {
     @Autowired
-    HealthServiceImpl actionService;
+    ActionServiceImpl actionService;
+    @Autowired
+    BunkerServiceImpl bunkerService;
     @Autowired
     CatastropheServiceImpl catastropheService;
     @Autowired
@@ -36,6 +38,11 @@ class HibernateTests {
     @Test
     void ActionServiceTest() {
         BaseServiceTest(actionService);
+    }
+
+    @Test
+    void BunkerServiceTest() {
+        BaseServiceTest(bunkerService);
     }
 
     @Test

@@ -15,6 +15,7 @@ public class SpringConfiguration {
     public SessionFactory sessionFactory() {
         return HibernateSessionFactoryUtil.getSessionFactory();
     }
+
     @Bean(name = "transactionManager")
     public PlatformTransactionManager dbTransactionManager() {
         JpaTransactionManager transactionManager

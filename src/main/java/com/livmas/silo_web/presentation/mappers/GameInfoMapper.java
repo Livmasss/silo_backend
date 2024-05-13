@@ -9,8 +9,8 @@ public abstract class GameInfoMapper {
     private GameInfoMapper() {}
     public static BunkerInfoResponseModel bunkerResponseModelFromBunkerModel(BunkerModel model) {
         return new BunkerInfoResponseModel(
-                model.description(),
-                model.capacity()
+                model.getDescription(),
+                model.getCapacity()
         );
     }
     public static CatastropheResponseModel catastropheResponseModelFromCatastropheModel(CatastropheModel model) {
