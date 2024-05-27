@@ -11,7 +11,7 @@
 
     <groupId>com.livmas</groupId>
     <artifactId>silo_web</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-ALPHA</version>
     <name>silo_web</name>
     <description>silo_web</description>
     <properties>

@@ -8,7 +8,9 @@ import org.hibernate.service.ServiceRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class HibernateSessionFactoryUtil {
@@ -35,9 +37,13 @@ public class HibernateSessionFactoryUtil {
     }
 
     private static void initiateProperties(Configuration configuration) throws IOException {
-        //Create Properties, can be read from property files too
         Properties props = new Properties();
-        props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("hibernate-dev.properties"));
+        try (InputStream input = new FileInputStream("/hibernate-dev.properties")) {
+            props.load(input);
+            logger.info("Hibernate properties loaded: {}", props);
+        } catch (IOException ex) {
+            logger.error("Error loading hibernate-dev.properties", ex);
+        }
 
         configuration.setProperties(props);
     }

@@ -7,7 +7,6 @@ import com.livmas.silo_web.domain.models.enums.GameStep;
 import com.livmas.silo_web.domain.usecases.gameinfo.GetRandomBunkerDtoUseCase;
 import com.livmas.silo_web.domain.usecases.gameinfo.GetRandomCatastropheDtoUseCase;
 import com.livmas.silo_web.domain.usecases.players.GetRandomPlayerModelUseCase;
-import com.livmas.silo_web.dtos.BunkerDTO;
 import com.livmas.silo_web.mappers.GameInfoMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

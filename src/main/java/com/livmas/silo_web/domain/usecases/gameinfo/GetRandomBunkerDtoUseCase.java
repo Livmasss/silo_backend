@@ -1,9 +1,7 @@
 package com.livmas.silo_web.domain.usecases.gameinfo;
 
 import com.livmas.silo_web.data.services.BunkerService;
-import com.livmas.silo_web.data.services.CatastropheService;
 import com.livmas.silo_web.dtos.BunkerDTO;
-import com.livmas.silo_web.dtos.CatastropheDto;
 import com.livmas.silo_web.mappers.GameInfoMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
